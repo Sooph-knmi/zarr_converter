@@ -1,0 +1,18 @@
+# store: /lustre/storeB/project/nwp/aifs/datasets/aifs-meps-5km-2020-2023-6h-nofill-v1.zarr
+store: '/home/sophiebuurman/data1/data2/zarr_converter/output/dowa2008.zarr'
+
+#  /lustre/storeB/project/nwp/aifs/datasets/aifs-meps-5km-2020-2023-6h-nofill-v1.zarr
+
+groups:
+  - count
+  - data
+  - dates
+  - latitudes
+  - longitudes
+  - x
+  - y
+  - mean
+  - squares
+  - stdev
+  - sums
+  - _build
