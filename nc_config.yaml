@@ -1,0 +1,146 @@
+# config file for netcdf input data
+#variables to include in order:
+pvab path: /ec/res4/hpcperm/ecme5801/DOWA/model_levels.txt
+# ps_path: /home/sophiebuurman/dowa-bucket/ps.his.NETHERLANDS.DOWA_40h12tg2_fERA5_ptA.20100101.nc
+include:
+  - hus
+  - huss
+  - phi
+  - ps
+  - psl
+  - sst
+  - ta
+  - tas
+  - ua
+  - uas
+  - va
+  - w
+  - vas
+  - ts
+  - 2d # for now set to 0
+  - orography_stddev # set to 0 for now
+  - orography_slope #both of these are not in meps, will set to zero for now
+  - cp #for now set to 0
+  - tp #for now set to 0
+  - cos_latitude
+  - cos_longitude
+  - sin_latitude
+  - sin_longitude
+  - cos_julian_day
+  - cos_local_time
+  - sin_julian_day
+  - sin_local_time
+  - insolation
+  - tcw # for now set to 0
+  - lsm
+  - z
+    # include:
+#   - specific_humidity_pl
+#   - air_temperature_pl
+#   - x_wind_pl
+#   - y_wind_pl
+#   - upward_air_velocity_pl
+#   - geopotential_pl
+#   - x_wind_10m
+#   - y_wind_10m
+#   - air_temperature_2m
+  # - land_area_fraction
+#   - air_pressure_at_sea_level
+#   - air_temperature_0m
+#   - surface_air_pressure
+# #but what about SFX_TS?
+# #  - SFX_DSN_T_ISBA #note that this one is masked, need to fill with values.
+#   - surface_geopotential
+#   - precipitation_amount_acc
+  # - z # for now set to 0 
+
+# variables to drop after calculating new quantities
+drop:
+  - hms
+  # - relative_humidity_2m
+  # - lwe_thickness_of_atmosphere_mass_content_of_water_vapor
+  # - mass_fraction_of_cloud_condensed_water_in_air_ml
+  # - mass_fraction_of_cloud_ice_in_air_ml
+  # - mass_fraction_of_graupel_in_air_ml
+  # - mass_fraction_of_rain_in_air_ml
+  # - mass_fraction_of_snow_in_air_ml
+  # - ap
+  # - b
+  # - pressure
+  # - x
+  # - y
+pl_var:
+  - hus
+  - phi
+  - ta
+  - ua
+  - va
+  - w
+mapping:
+  hus : q
+  ta : t
+  ua : u
+  va : v
+  w: w
+  phi : z
+  ps : sp
+  psl : msl
+  Sftof : lsm
+  orography_stddev: sdor  #note that this one and the next one will be be set to zeros for now to indicate that our grid is fine enough
+  orography_slope: slor
+  uas : 10u
+  vas : 10v
+  tas : 2t
+  2d : 2d
+  sst : sst
+  cp : cp
+  prrain: tp
+  cos_latitude : cos_latitude
+  cos_longitude : cos_longitude
+  sin_latitude : sin_latitude
+  sin_longitude : sin_longitude
+  cos_julian_day : cos_julian_day
+  cos_local_time : cos_local_time
+  sin_julian_day : sin_julian_day
+  sin_local_time : sin_local_time
+  insolation : insolation
+  tcw : tcw
+  tp: tp
+  lsm: lsm
+  z: z
+  ts: skt
+  huss: q_2m
+# SFX_DSN_T_ISBA : sd
+
+  
+# mapping:
+#   specific_humidity_pl : q
+#   air_temperature_pl : t
+#   x_wind_pl : u
+#   y_wind_pl : v
+#   upward_air_velocity_pl: w
+#   geopotential_pl : z
+#   surface_geopotential : z
+#   surface_air_pressure : sp
+#   air_pressure_at_sea_level : msl
+#   land_area_fraction : lsm
+#   orography_stddev: sdor  #note that this one and then ext one will be be set to zeros for now to indicate that our grid is fine enough
+#   orography_slope: slor
+#   x_wind_10m : 10u
+#   y_wind_10m : 10v
+#   air_temperature_2m : 2t
+#   2d : 2d
+#   air_temperature_0m : skt
+# # SFX_DSN_T_ISBA : sd
+#   cp : cp
+#   precipitation_amount_acc : tp
+#   cos_latitude : cos_latitude
+#   cos_longitude : cos_longitude
+#   sin_latitude : sin_latitude
+#   sin_longitude : sin_longitude
+#   cos_julian_day : cos_julian_day
+#   cos_local_time : cos_local_time
+#   sin_julian_day : sin_julian_day
+#   sin_local_time : sin_local_time
+#   insolation : insolation
+#   tcw : tcw
