@@ -210,9 +210,39 @@ def calculate_dewpoint(arr1: np.ndarray, arr2: np.ndarray) -> np.ndarray:
             the dewpoint reshaped to one of the arrays shape.
 
     """
+    import gridpp
     shape = arr1.shape
-    dewpoint = gridpp.dewpoint(arr1.flatten(), arr2.flatten())
-    return np.reshape(dewpoint, shape)
+    #dewpoint = gridpp.dewpoint(arr1.flatten(), arr2.flatten())
+    res_dewpoint = gridpp.dewpoint(arr1.flatten(), arr2.flatten())
+    return np.reshape(res_dewpoint, shape)
+
+
+def calculate_relative_humidity(arr1: np.ndarray, arr2: np.ndarray, arr3: np.ndarray) -> np.ndarray:
+        """
+            Calculates the relative humidity by using air temperature
+            specific humidity, pressure.
+            
+            args:
+                arr1 (np.ndarray): air temperature array
+                arr2 (np.ndarray): specific humidity array
+                arr3 (np.ndarray): pressure array
+            
+            return:
+                the relative humidity reshaped to one of the arrays shape.
+
+        """
+        shape = arr1.shape
+        tmp_array_es = np.zeros_like(arr1)
+        tmp_array_SHS = np.zeros_like(arr1)
+        res_array_RH = np.zeros_like(arr1)
+        
+        #1. Compute Saturation Vapor Pressure (for ps in Pa, tas in K, see. Lawrence 2004)
+        tmp_array_es=610.94*np.exp(17.625*(arr1-273.15)/(arr1-273.15+243.04))
+        #2. Compute Specific Humidity at Saturation
+        tmp_array_SHS=(0.622*tmp_array_es)/(arr3-(0.378*tmp_array_es))
+        #3. Compute relative humidity
+        res_array_RH=(arr2/tmp_array_SHS)*100
+        return res_array_RH
 
 
 def rotate(x_wind, y_wind, lats, lons, proj_str_from, proj_str_to="proj+=longlat"):
@@ -389,9 +419,6 @@ def model_to_pressure_levels_numba(ps, target_pressure_levels, par, t, PVAB):
     par_shape = par.shape
     n_model_levels = par_shape[1]
     n_pres_levels = len(target_pressure_levels)
-
-    # PVAB_path = "/home/sophiebuurman/data1/aifs-lam-dowa/model_levels.txt"
-    # PVAB = np.loadtxt(PVAB_path)
     
     VBH = PVAB[:,0]
     VAH = PVAB[:,1]

@@ -1,9 +1,10 @@
 # config file for netcdf input data
 #variables to include in order:
-pvab path: /home/sophiebuurman/data1/aifs-lam-dowa/model_levels.txt
+pvab path: /ec/res4/hpcperm/ecme5801/DOWA/model_levels.txt
 # ps_path: /home/sophiebuurman/dowa-bucket/ps.his.NETHERLANDS.DOWA_40h12tg2_fERA5_ptA.20100101.nc
 include:
   - hus
+  - huss
   - phi
   - ps
   - psl
@@ -15,30 +16,12 @@ include:
   - va
   - w
   - vas
-# include:
-#   - specific_humidity_pl
-#   - air_temperature_pl
-#   - x_wind_pl
-#   - y_wind_pl
-#   - upward_air_velocity_pl
-#   - geopotential_pl
-#   - x_wind_10m
-#   - y_wind_10m
+  - ts
   - 2d # for now set to 0
-#   - air_temperature_2m
-  # - land_area_fraction
-#   - air_pressure_at_sea_level
   - orography_stddev # set to 0 for now
-#   - air_temperature_0m
   - orography_slope #both of these are not in meps, will set to zero for now
-#   - surface_air_pressure
-# #but what about SFX_TS?
-# #  - SFX_DSN_T_ISBA #note that this one is masked, need to fill with values.
-#   - surface_geopotential
   - cp #for now set to 0
-#   - precipitation_amount_acc
   - tp #for now set to 0
-  # - z # for now set to 0 
   - cos_latitude
   - cos_longitude
   - sin_latitude
@@ -51,6 +34,25 @@ include:
   - tcw # for now set to 0
   - lsm
   - z
+    # include:
+#   - specific_humidity_pl
+#   - air_temperature_pl
+#   - x_wind_pl
+#   - y_wind_pl
+#   - upward_air_velocity_pl
+#   - geopotential_pl
+#   - x_wind_10m
+#   - y_wind_10m
+#   - air_temperature_2m
+  # - land_area_fraction
+#   - air_pressure_at_sea_level
+#   - air_temperature_0m
+#   - surface_air_pressure
+# #but what about SFX_TS?
+# #  - SFX_DSN_T_ISBA #note that this one is masked, need to fill with values.
+#   - surface_geopotential
+#   - precipitation_amount_acc
+  # - z # for now set to 0 
 
 # variables to drop after calculating new quantities
 drop:
@@ -90,8 +92,7 @@ mapping:
   vas : 10v
   tas : 2t
   2d : 2d
-  sst : skt
-# SFX_DSN_T_ISBA : sd
+  sst : sst
   cp : cp
   prrain: tp
   cos_latitude : cos_latitude
@@ -107,7 +108,11 @@ mapping:
   tp: tp
   lsm: lsm
   z: z
+  ts: skt
+  huss: q_2m
+# SFX_DSN_T_ISBA : sd
 
+  
 # mapping:
 #   specific_humidity_pl : q
 #   air_temperature_pl : t

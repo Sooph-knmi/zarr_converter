@@ -164,17 +164,45 @@ class Core(Data):
             
             returns:
                     dataset['2d']
-        
+
         """
         from zarr_utils import calculate_dewpoint
-
 
         arr1 = self.dataset["ta"]
         arr2 = self.dataset["relative_humidity_2m"]
         dewpoint = calculate_dewpoint(arr1.values, arr2.values)
-
-        self.dataset["2d"] = (arr1.dims, dewpoint)
+        
+        self.dataset["2d"] = (arr_tas.dims, dewpoint)
         return self.dataset["2d"]
+    
+    @property
+    def dewpoint_from_specific_humidity(self) -> None:
+        """
+            Calculates the dewpoint. This method used
+            tas, huss and ps variables. 
+            Adds the dewpoint to the dataset as the key 2d
+
+            args:
+                None
+            
+            returns:
+                    dataset['2d']
+        """
+        from zarr_utils import calculate_relative_humidity
+        from zarr_utils import calculate_dewpoint
+
+        arr_tas = self.dataset["tas"]
+        arr_huss = self.dataset["huss"]
+        arr_ps = self.dataset["ps"]
+        
+        print('DEWPOINT FROM SPECIFIC HUMIDITY')
+        tmp_RH=calculate_relative_humidity(arr_tas.values, arr_huss.values, arr_ps.values)   
+        dewpoint = calculate_dewpoint(arr_tas.values, tmp_RH)
+        print('END DEWPOINT')
+
+        self.dataset["2d"] = (arr_tas.dims, dewpoint)
+        return self.dataset["2d"]
+    
     
     @property
     def get_static_properties(self) -> None:

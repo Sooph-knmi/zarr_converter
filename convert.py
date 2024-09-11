@@ -37,9 +37,9 @@ def meps_to_zarr(
         )   
         config = ds.config
         print("date", ds.dates[date_index])
-        if os.path.exists("/home/sophiebuurman/data1/data2/zarr_converter/output/dowa2008.zarr"):
+        if os.path.exists("/ec/res4/scratch/ecme5801/DOWA_zarr/dowa2013.zarr"):
             print("path exists")
-            anemoi_zarr = open_dataset("/home/sophiebuurman/data1/data2/zarr_converter/output/dowa2008.zarr")
+            anemoi_zarr = open_dataset("/ec/res4/scratch/ecme5801/DOWA_zarr/dowa2013.zarr")
             if np.array(ds.dataset["time"])[date_index] in anemoi_zarr.dates:
                 print("date already exists, skipping")
                 pass
@@ -64,8 +64,6 @@ def meps_to_zarr_create(ds, date_index, grid_steps, config, zarr_config):
     #CHANGE DATES TO DATETIME64[s]
     ds.dates = ds.dates.astype('datetime64[s]')
 
-
-
     # CONVERT MODEL LEVELS TO PRESSURE LEVELS
     target = np.array([50,100,150,200,250,300,400,500,600,700,850,925,1000])
     ds.model_to_pressure_levels(config, target)
@@ -78,9 +76,10 @@ def meps_to_zarr_create(ds, date_index, grid_steps, config, zarr_config):
     ds.change_units
 
     #CALCULATE ADDITIONAL PROPERTIES
+    ds.dewpoint_from_specific_humidity
     # ds.dewpoint #calculates the 2m dewpoint temperature
     # ds.total_column_water #calculate total column water
-    
+
     ds.fill_unimplemented #fills in unimplemented variables with zeros mostly.
     
     ds.get_static_properties #calculates sin/cos of lat/lon/day/time and insolation, and adds to dataset
@@ -100,7 +99,7 @@ def meps_to_zarr_create(ds, date_index, grid_steps, config, zarr_config):
 # if last_pass is not None:
     tz = ToZarr(config = zarr_config)
     start_time = {
-        "year": 2008,
+        "year": 2013,
         "month": 1,
         "day": 1,
         "hour": 00
@@ -113,7 +112,7 @@ def meps_to_zarr_create(ds, date_index, grid_steps, config, zarr_config):
     # }
 
     end_time = {
-        "year": 2008,
+        "year": 2013,
         "month": 12,
         "day": 31,
         "hour": 00

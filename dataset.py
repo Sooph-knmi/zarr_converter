@@ -396,9 +396,6 @@ if __name__ == "__main__":
         new_dim = (old_dim[0], old_dim[1], old_dim[2]*old_dim[3])
         ds.reshape_array(varname,dim=new_dim, inplace=True)
 
-  
-    
-
     dataset = ds.create_dataset(
         config = True,
         concat = True, 

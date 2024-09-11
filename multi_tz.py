@@ -3,47 +3,29 @@ from add_end_data_separately import add_end_data
 import glob, os
 import time
 
-# zarr_config = '/lustre/storeB/project/nwp/aifs/havardhh/aifs/aifs-support/zarr_converter/zarr_config.yaml'
-zarr_config = '/home/sophiebuurman/data1/data2/zarr_converter/zarr_config.yaml'
-# nc_config = '/lustre/storeB/project/nwp/aifs/havardhh/aifs/aifs-support/zarr_converter/nc_config.yaml'
-nc_config = '/home/sophiebuurman/data1/data2/zarr_converter/nc_config.yaml'
-netcdf_folder = "/home/sophiebuurman/dowa-bucket/dowa_4years/dowa2015"
+zarr_config = '/ec/res4/hpcperm/ecme5801/DOWA/zarr_converter/zarr_config.yaml'
+nc_config= '/ec/res4/hpcperm/ecme5801/DOWA/zarr_converter/nc_config.yaml'
+netcdf_folder = "/ec/res4/scratch/ecme5801/dowa2013"
 
 frequency = 3
 nth_point = 1
 fill_missing = False #whether to fill missing time steps with previous time step, or to skip if False
 
 start_time = {
-    "year": 2008,
+    "year": 2013,
     "month": 1,
     "day": 1,
 }
-# start_time = {
-#     "year": 2020,
-#     "month": 2,
-#     "day": 5,
-#     "hour": 0
-# }
 
 end_time = {
-    "year": 2008,
+    "year": 2013,
     "month": 12,
     "day": 31,
 }
-# end_time = {
-#     "year": 2023,
-#     "month": 12,
-#     "day": 4,
-#     "hour": 18
-# }
 
-# hours = range(0, 24, frequency)
 months = range(1, 13)
-# months = [1]
 month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-# month_days = range(24,)
-# years = range(int(start_time["year"]), int(end_time["year"])+1)
-years = [2008]
+years = [2013]
 
 
 mstepcounter = 0
@@ -71,20 +53,11 @@ for year in years:
                     start_passed = True
             if start_passed:
                 print("start passed")
-                # ncpath = f"/lustre/storeB/immutable/archive/projects/metproduction/meps/{year:04d}/{month:02d}/{day:02d}/meps_det_2_5km_{year:04d}{month:02d}{day:02d}T{hour:02d}Z.nc"
-                # ncpath = f"/home/sophiebuurman/dowa-data/ps.his.NETHERLANDS.DOWA_40h12tg2_fERA5_ptA.{year:04d}{month:02d}{day:02d}.nc"
-                
-                # for ncfile in os.listdir(netcdf_folder):
-                #     ncpath = os.path.join(netcdf_folder, ncfile)
-                varlist = ["hus", "phi", "ps.", "ta.", "ua.", "va.", "w", "psl", "sst", "tas", "uas", "vas", ]
-                # ncpath = []
+                varlist = ["hus", "huss", "phi", "ps.", "ta.", "ua.", "va.", "w", "psl", "sst", "tas", "uas", "vas", ]
                 ncpath = [os.path.join(netcdf_folder, item) for item in os.listdir(netcdf_folder) if item.endswith(f"{year:04d}{month:02d}{day:02d}.nc")]
-                # print("not printing ncpath")
-                # add_end_data(ncpath, nth_point, last_pass, mstepcounter, nc_config=nc_config, zarr_config=
-                        # zarr_config)
                 for path in ncpath:
                     for var in varlist:
-                        if path.startswith("/home/sophiebuurman/dowa-bucket/dowa_4years/dowa2015/" + var) == True:
+                        if path.startswith("/ec/res4/scratch/ecme5801/dowa2013/" + var) == True:
                             # print(var)
                             varlist.remove(var)
                 if fill_missing:
@@ -96,7 +69,6 @@ for year in years:
                         previous_existing_step = ncpath
                         mstepcounter = 0
                         mtz(ncpath, nth_point, last_pass, mstepcounter, nc_config=nc_config, zarr_config=zarr_config)
-
                 else:
                     if len(varlist)==0:
                         mtz(ncpath, nth_point, last_pass, mstepcounter, nc_config=nc_config, zarr_config=
