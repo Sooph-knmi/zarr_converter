@@ -138,12 +138,11 @@ class Dataset(Core):
             #RESHAPING FOR DIFFERENT VAR SHAPES:
             # self.dataset = self.dataset.chunk{}
             var_dims = self.dataset[varname].dims   #Shape of the variable
-
             if len(var_dims) == 4 and set(('time', 'y', 'x')).issubset(var_dims):
                 dim1len = self.dataset[varname].shape[1]
                 from scipy.ndimage import uniform_filter
                 var_val = self[varname].values.reshape((max_shape[0], dim1len, max_shape[2]*max_shape[3]))  #these parameters have the desired shape, with the second axis being either 1 or 13 in length
-                var_val = uniform_filter(self.dataset[varname].values, axes=[2,3]).reshape((max_shape[0], dim1len, max_shape[2]*max_shape[3]))
+                # var_val = uniform_filter(self.dataset[varname].values, axes=[2,3]).reshape((max_shape[0], dim1len, max_shape[2]*max_shape[3]))
                 
             else:
                 if var_dims == ('time', 'y', 'x'):
@@ -159,13 +158,14 @@ class Dataset(Core):
                     # var_val = self[varname].values.flatten() #flatten lat long
                     var_val = self.dataset[varname].values.flatten()
                     var_val = var_val[np.newaxis, np.newaxis, ...].repeat(max_shape[0], axis = 0) 
-                            
+
+            # var_vals.append(np.nan_to_num(var_val))      
             var_vals.append(var_val)
         #COLLECT DATA AND CALCULATE STATISTICS
-
         data_array = np.concatenate(var_vals, axis=1)
         stats = self.alt_statistics(data=data_array)  #statistics should be in float64, but the data should be in float32
         data_array = data_array.astype(np.float32)
+
         data_array = data_array[:, :, np.newaxis, :]   #adds the ensemble dimension to the data
 
         return data_array, stats
@@ -224,6 +224,15 @@ class Dataset(Core):
                 updates the object self
         
         """
+        # print(self.dataset["prrain"].values)
+        # print(self.dataset["sst"].values)
+        # self.dataset["prrain"] = self.dataset["prrain"].isel(time=[length+1])
+        # for key in self.dataset.data_vars:
+        #     if key != "Lambert_Conformal":
+        #         print(key)
+        #         self.dataset[key] = self.dataset[key].isel(time = [length])
+        # print(self.dataset["prrain"].values)
+        # print(self.dataset["sst"].values)
         self.dataset = self.dataset.isel(time = [length])
         return self
     
@@ -233,7 +242,7 @@ class Dataset(Core):
             
             return:
                 updates the object self
-        
+
         """
         yrange = range(0, len(self.dataset.coords["y"]), ystep)
         xrange = range(0, len(self.dataset.coords["x"]), xstep)

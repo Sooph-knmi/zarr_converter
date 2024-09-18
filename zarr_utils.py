@@ -433,17 +433,22 @@ def model_to_pressure_levels_numba(ps, target_pressure_levels, par, t, PVAB):
             for p, pl in enumerate(target_pressure_levels):
                 idx = np.searchsorted(array, pl, side="left")
                 if idx == 0:
-                    alpha = (pl - array[0]) / (array[20] - array[0])
+                    # alpha = (pl - array[0]) / (array[20] - array[0])
                     #print(f"Extrapolating left: pl={pl}, alpha={alpha}, par0={par[t, 0, j, k]}, par1={par[t, 1, j, k]}")
-                    parout[j, k, p] = par[t, 0, j, k] + alpha * (par[t, 20, j, k] - par[t, 0, j, k])
+                    # parout[j, k, p] = alpha[0]*pl + alpha[1]
+                    parout[j, k, p] = par[t, 0, j, k]
+
                 elif idx == len(array):
-                    alpha = (pl - array[-20]) / (array[-1] - array[-20])
+                    # alpha = (pl - array[-20]) / (array[-1] - array[-20])
                     #print(f"Extrapolating right: pl={pl}, alpha={alpha}, parN-2={par[t, -2, j, k]}, parN-1={par[t, -1, j, k]}")
-                    parout[j, k, p] = par[t, -20, j, k] + alpha * (par[t, -1, j, k] - par[t, -20, j, k])
+                    # parout[j, k, p] = par[t, -20, j, k] + alpha * (par[t, -1, j, k] - par[t, -20, j, k])
+                    # parout[j, k, p] = alpha[0]*pl + alpha[1]
+                    parout[j, k, p] = par[t, -1, j, k]
+
                 else:
-                        alpha = (pl - array[idx-1]) / (array[idx] - array[idx-1])
-                        #print(f"Interpolating: pl={pl}, alpha={alpha}, parIdx-1={par[t, idx-1, j, k]}, parIdx={par[t, idx, j, k]}")
-                        parout[j, k, p] = par[t, idx-1, j, k] + alpha * (par[t, idx, j, k] - par[t, idx-1, j, k])
+                    alpha = (pl - array[idx-1]) / (array[idx] - array[idx-1])
+                    #print(f"Interpolating: pl={pl}, alpha={alpha}, parIdx-1={par[t, idx-1, j, k]}, parIdx={par[t, idx, j, k]}")
+                    parout[j, k, p] = par[t, idx-1, j, k] + alpha * (par[t, idx, j, k] - par[t, idx-1, j, k])
     
     return parout
 

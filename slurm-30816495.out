@@ -1,0 +1,26 @@
+[ECMWF-INFO -ecepilog] ----------------------------------------------------------------------------------------------------
+[ECMWF-INFO -ecepilog] This is the ECMWF job Epilogue
+[ECMWF-INFO -ecepilog] +++ Please report issues using the Support portal +++
+[ECMWF-INFO -ecepilog] +++ https://support.ecmwf.int                     +++
+[ECMWF-INFO -ecepilog] ----------------------------------------------------------------------------------------------------
+[ECMWF-INFO -ecepilog] Run at 2024-09-18T09:40:25 on ac
+[ECMWF-INFO -ecepilog] JobName                   : zarr_conv_dowa
+[ECMWF-INFO -ecepilog] JobID                     : 30816495
+[ECMWF-INFO -ecepilog] Submit                    : 2024-09-18T09:00:15
+[ECMWF-INFO -ecepilog] Start                     : 2024-09-18T09:00:19
+[ECMWF-INFO -ecepilog] End                       : 2024-09-18T09:40:25
+[ECMWF-INFO -ecepilog] QueuedTime                : 4.0
+[ECMWF-INFO -ecepilog] ElapsedRaw                : 2406
+[ECMWF-INFO -ecepilog] ExitCode                  : 0:0
+[ECMWF-INFO -ecepilog] DerivedExitCode           : 0:0
+[ECMWF-INFO -ecepilog] State                     : CANCELLED by 26325
+[ECMWF-INFO -ecepilog] Account                   : nldmlam
+[ECMWF-INFO -ecepilog] QOS                       : nf
+[ECMWF-INFO -ecepilog] User                      : nld1247
+[ECMWF-INFO -ecepilog] StdOut                    : /lus/h2resw01/hpcperm/nld1247/zarr_converter/slurm-30816495.out
+[ECMWF-INFO -ecepilog] StdErr                    : /lus/h2resw01/hpcperm/nld1247/zarr_converter/slurm-30816495.out
+[ECMWF-INFO -ecepilog] NNodes                    : 1
+[ECMWF-INFO -ecepilog] NCPUS                     : 32
+[ECMWF-INFO -ecepilog] SBU                       : 182.467
+[ECMWF-INFO -ecepilog] ----------------------------------------------------------------------------------------------------
+

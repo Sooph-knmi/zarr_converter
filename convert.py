@@ -26,8 +26,10 @@ def meps_to_zarr(
     #LEAD TIME AND COORDINATE SELECTION
     lead_length = range(0, 48, 12) #takes every 6th hour from the dataset
 
+
     grid_steps = [nth_point, nth_point] #only use every nth point in the x and y directions, this allows for downscaling the meps data.
     for date_index in lead_length:
+        print(date_index)
         # nc_config["include"] = (nc_path.partition("/")[-1]).partition(".")[0]
         ds = Dataset(
         path=nc_path,  #I probably should have dataset load the config files directly instead of sending them in as function arguments.
@@ -37,9 +39,9 @@ def meps_to_zarr(
         )   
         config = ds.config
         print("date", ds.dates[date_index])
-        if os.path.exists("/ec/res4/scratch/ecme5801/DOWA_zarr/dowa2013.zarr"):
+        if os.path.exists("/hpcperm/nld1247/zarr_converter/output/test.zarr"):
             print("path exists")
-            anemoi_zarr = open_dataset("/ec/res4/scratch/ecme5801/DOWA_zarr/dowa2013.zarr")
+            anemoi_zarr = open_dataset("/hpcperm/nld1247/zarr_converter/output/test.zarr")
             if np.array(ds.dataset["time"])[date_index] in anemoi_zarr.dates:
                 print("date already exists, skipping")
                 pass
@@ -67,7 +69,6 @@ def meps_to_zarr_create(ds, date_index, grid_steps, config, zarr_config):
     # CONVERT MODEL LEVELS TO PRESSURE LEVELS
     target = np.array([50,100,150,200,250,300,400,500,600,700,850,925,1000])
     ds.model_to_pressure_levels(config, target)
-    
     # ROTATE WINDS
     ds.rotate_wind_parallel("uas", "vas")      #rotates 10m x and y wind
     ds.rotate_wind("ua", "va")        #rotates pressure level x and y wind

@@ -17,11 +17,12 @@ include:
   - w
   - vas
   - ts
+  # - prrain
   - 2d # for now set to 0
   - orography_stddev # set to 0 for now
   - orography_slope #both of these are not in meps, will set to zero for now
   - cp #for now set to 0
-  - tp #for now set to 0
+  # - tp #for now set to 0
   - cos_latitude
   - cos_longitude
   - sin_latitude
@@ -56,7 +57,7 @@ include:
 
 # variables to drop after calculating new quantities
 drop:
-  - hms
+  - huss
   # - relative_humidity_2m
   # - lwe_thickness_of_atmosphere_mass_content_of_water_vapor
   # - mass_fraction_of_cloud_condensed_water_in_air_ml

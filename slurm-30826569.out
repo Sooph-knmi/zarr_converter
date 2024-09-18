@@ -1,0 +1,112 @@
+[ECMWF-INFO -sbatch] - -------------------------------------------------------------------------------------
+[ECMWF-INFO -sbatch] -  This is the ECMWF jobfilter
+[ECMWF-INFO -sbatch] -  +++ Please report issues using the Support portal +++
+[ECMWF-INFO -sbatch] -  +++ https://support.ecmwf.int                     +++
+[ECMWF-INFO -sbatch] -  /usr/local/bin/ecsbatch: size: 49527, mtime: Thu Sep  5 11:59:47 2024
+[ECMWF-INFO -sbatch] - -------------------------------------------------------------------------------------
+[ECMWF-INFO -sbatch] - Time at submit: Wed Sep 18 09:33:44 2024 (1726652024.9597375) on ac6-102.bullx:/lus/h2resw01/hpcperm/nld1247/zarr_converter
+[ECMWF-INFO -sbatch] - --- SLURM VARIABLES ---
+[ECMWF-INFO -sbatch] - EC_CLUSTER=ac
+[ECMWF-INFO -sbatch] - SLURM_EXPORT_ENV=ALL
+[ECMWF-INFO -sbatch] - SBATCH_EXPORT=NONE
+[ECMWF-INFO -sbatch] - -----------------------
+[ECMWF-INFO -sbatch] - jobscript: /lus/h2resw01/hpcperm/nld1247/zarr_converter/zarr_converter.sh
+[ECMWF-INFO -sbatch] - --- SCRIPT OPTIONS ---
+[ECMWF-INFO -sbatch] - #SBATCH --nodes=1
+[ECMWF-INFO -sbatch] - #SBATCH --ntasks-per-node=1
+[ECMWF-INFO -sbatch] - #SBATCH --gpus-per-node=0
+[ECMWF-INFO -sbatch] - #SBATCH --cpus-per-task=32
+[ECMWF-INFO -sbatch] - #SBATCH --mem=64GB
+[ECMWF-INFO -sbatch] - #SBATCH --time=2:00:00
+[ECMWF-INFO -sbatch] - #SBATCH --job-name=zarr_conv_dowa
+[ECMWF-INFO -sbatch] - -----------------------
+[ECMWF-INFO -sbatch] - --- POST-PROCESSED OPTIONS ---
+[ECMWF-INFO -sbatch] - ARG --positional=['zarr_converter.sh']
+[ECMWF-INFO -sbatch] - ARG --cpus_per_task=32
+[ECMWF-INFO -sbatch] - ARG --job_name=zarr_conv_dowa
+[ECMWF-INFO -sbatch] - ARG --ntasks_per_node=1
+[ECMWF-INFO -sbatch] - ARG --nodes=1
+[ECMWF-INFO -sbatch] - ARG --time=2:00:00
+[ECMWF-INFO -sbatch] - ARG --mem=64GB
+[ECMWF-INFO -sbatch] - ARG --gpus_per_node=0
+[ECMWF-INFO -sbatch] - ------------------------------
+[ECMWF-INFO -sbatch] - jobtag: nld1247-zarr_conv_dowa-1x32-/lus/h2resw01/hpcperm/nld1247/zarr_converter/slurm-_JOBID_.out
+[ECMWF-INFO -sbatch] - ------------------------------
+[ECMWF-INFO -sbatch] - Average Walltime 0 with a Standard Deviation 0
+[ECMWF-INFO -sbatch] - Runtime history
+[ECMWF-INFO -sbatch] -   Date               | Cores   Cluster   Walltime       Mem
+[ECMWF-INFO -sbatch] - 
+[ECMWF-INFO -sbatch] - ['/usr/bin/sbatch', '--cpus-per-task=32', '--job-name=zarr_conv_dowa', '--ntasks-per-node=1', '--nodes=1', '--time=2:00:00', '--mem=64GB', '--gpus-per-node=0', '--licenses=h2resw01', '--export=EC_user_time_limit=2:00:00', '/lus/h2resw01/hpcperm/nld1247/zarr_converter/zarr_converter.sh']
+[ECMWF-INFO -sbatch] - sbatch executed on ac
+[ECMWF-INFO -sbatch] - Job queued on ac using method local
+[ECMWF-INFO -sbatch] - Submitted batch job 30826569
+[ECMWF-INFO -ecprofile] /usr/bin/bash NON_INTERACTIVE on ac6-193 at 20240918_093357.536, PID: 3934717, JOBID: 30826569
+[ECMWF-INFO -ecprofile] $SCRATCH=/ec/res4/scratch/nld1247
+[ECMWF-INFO -ecprofile] $PERM=/perm/nld1247
+[ECMWF-INFO -ecprofile] $HPCPERM=/ec/res4/hpcperm/nld1247
+[ECMWF-INFO -ecprofile] $TMPDIR=/etc/ecmwf/ssd/ssd1/tmpdirs/nld1247.30826569
+[ECMWF-INFO -ecprofile] $SCRATCHDIR=/ec/res4/scratchdir/nld1247/1/30826569
+
+Lmod is automatically replacing "prgenv/gnu" with "conda/23.11.0-0".
+
+-------------------------------------------------------------------------------
+There are messages associated with the following module(s):
+-------------------------------------------------------------------------------
+
+conda/23.11.0-0:
+   Using conda effectively disables any other loaded modules. Use "module
+   reset" to return to the default environment.
+
+-------------------------------------------------------------------------------
+
+/perm/nld1247/conda/envs/zarr/lib/python3.10/site-packages/pyproj/crs/crs.py:1293: UserWarning: You will likely lose important projection information when converting to a PROJ string from another format. See: https://proj.org/faq.html#what-is-the-best-format-for-describing-coordinate-reference-systems
+  proj = self._crs.to_proj4(version=version)
+/perm/nld1247/conda/envs/zarr/lib/python3.10/site-packages/pyproj/crs/crs.py:1293: UserWarning: You will likely lose important projection information when converting to a PROJ string from another format. See: https://proj.org/faq.html#what-is-the-best-format-for-describing-coordinate-reference-systems
+  proj = self._crs.to_proj4(version=version)
+/lus/h2resw01/hpcperm/nld1247/zarr_converter/aggregate.py:37: RuntimeWarning: invalid value encountered in subtract
+  variance = (sqrs - N*mns**2)/(N - 1)
+/perm/nld1247/conda/envs/zarr/lib/python3.10/site-packages/pyproj/crs/crs.py:1293: UserWarning: You will likely lose important projection information when converting to a PROJ string from another format. See: https://proj.org/faq.html#what-is-the-best-format-for-describing-coordinate-reference-systems
+  proj = self._crs.to_proj4(version=version)
+/perm/nld1247/conda/envs/zarr/lib/python3.10/site-packages/pyproj/crs/crs.py:1293: UserWarning: You will likely lose important projection information when converting to a PROJ string from another format. See: https://proj.org/faq.html#what-is-the-best-format-for-describing-coordinate-reference-systems
+  proj = self._crs.to_proj4(version=version)
+/lus/h2resw01/hpcperm/nld1247/zarr_converter/aggregate.py:37: RuntimeWarning: invalid value encountered in subtract
+  variance = (sqrs - N*mns**2)/(N - 1)
+/perm/nld1247/conda/envs/zarr/lib/python3.10/site-packages/pyproj/crs/crs.py:1293: UserWarning: You will likely lose important projection information when converting to a PROJ string from another format. See: https://proj.org/faq.html#what-is-the-best-format-for-describing-coordinate-reference-systems
+  proj = self._crs.to_proj4(version=version)
+/perm/nld1247/conda/envs/zarr/lib/python3.10/site-packages/pyproj/crs/crs.py:1293: UserWarning: You will likely lose important projection information when converting to a PROJ string from another format. See: https://proj.org/faq.html#what-is-the-best-format-for-describing-coordinate-reference-systems
+  proj = self._crs.to_proj4(version=version)
+/lus/h2resw01/hpcperm/nld1247/zarr_converter/aggregate.py:37: RuntimeWarning: invalid value encountered in subtract
+  variance = (sqrs - N*mns**2)/(N - 1)
+/perm/nld1247/conda/envs/zarr/lib/python3.10/site-packages/pyproj/crs/crs.py:1293: UserWarning: You will likely lose important projection information when converting to a PROJ string from another format. See: https://proj.org/faq.html#what-is-the-best-format-for-describing-coordinate-reference-systems
+  proj = self._crs.to_proj4(version=version)
+/perm/nld1247/conda/envs/zarr/lib/python3.10/site-packages/pyproj/crs/crs.py:1293: UserWarning: You will likely lose important projection information when converting to a PROJ string from another format. See: https://proj.org/faq.html#what-is-the-best-format-for-describing-coordinate-reference-systems
+  proj = self._crs.to_proj4(version=version)
+srun: Job step aborted: Waiting up to 122 seconds for job step to finish.
+slurmstepd: error: *** STEP 30826569.0 ON ac6-193 CANCELLED AT 2024-09-18T09:37:26 ***
+slurmstepd: error: *** JOB 30826569 ON ac6-193 CANCELLED AT 2024-09-18T09:37:26 ***
+[ECMWF-INFO -ecepilog] ----------------------------------------------------------------------------------------------------
+[ECMWF-INFO -ecepilog] This is the ECMWF job Epilogue
+[ECMWF-INFO -ecepilog] +++ Please report issues using the Support portal +++
+[ECMWF-INFO -ecepilog] +++ https://support.ecmwf.int                     +++
+[ECMWF-INFO -ecepilog] ----------------------------------------------------------------------------------------------------
+[ECMWF-INFO -ecepilog] Run at 2024-09-18T09:37:26 on ac
+[ECMWF-INFO -ecepilog] JobName                   : zarr_conv_dowa
+[ECMWF-INFO -ecepilog] JobID                     : 30826569
+[ECMWF-INFO -ecepilog] Submit                    : 2024-09-18T09:33:45
+[ECMWF-INFO -ecepilog] Start                     : 2024-09-18T09:33:52
+[ECMWF-INFO -ecepilog] End                       : 2024-09-18T09:37:26
+[ECMWF-INFO -ecepilog] QueuedTime                : 7.0
+[ECMWF-INFO -ecepilog] ElapsedRaw                : 214
+[ECMWF-INFO -ecepilog] ExitCode                  : 0:0
+[ECMWF-INFO -ecepilog] DerivedExitCode           : 0:0
+[ECMWF-INFO -ecepilog] State                     : CANCELLED by 26325
+[ECMWF-INFO -ecepilog] Account                   : nldmlam
+[ECMWF-INFO -ecepilog] QOS                       : nf
+[ECMWF-INFO -ecepilog] User                      : nld1247
+[ECMWF-INFO -ecepilog] StdOut                    : /lus/h2resw01/hpcperm/nld1247/zarr_converter/slurm-30826569.out
+[ECMWF-INFO -ecepilog] StdErr                    : /lus/h2resw01/hpcperm/nld1247/zarr_converter/slurm-30826569.out
+[ECMWF-INFO -ecepilog] NNodes                    : 1
+[ECMWF-INFO -ecepilog] NCPUS                     : 32
+[ECMWF-INFO -ecepilog] SBU                       : 16.229
+[ECMWF-INFO -ecepilog] ----------------------------------------------------------------------------------------------------
+

@@ -301,7 +301,7 @@ class Core(Data):
         self.dataset['tcw'] = (fill_dims, np.zeros(fill_shape))
         self.dataset['cp'] = (fill_dims, np.zeros(fill_shape))
         self.dataset['tp'] = (fill_dims, np.zeros(fill_shape))
-        self.dataset['2d'] = (fill_dims, np.zeros(fill_shape))
+        # self.dataset['2d'] = (fill_dims, np.zeros(fill_shape))
         self.dataset['skt'] = (fill_dims, np.zeros(fill_shape))
         self.dataset['lsm'] = (fill_dims, np.zeros(fill_shape))
         self.dataset['z'] = (fill_dims, np.zeros(fill_shape))
