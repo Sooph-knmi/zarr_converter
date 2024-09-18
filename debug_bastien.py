@@ -29,6 +29,230 @@ years = [2013]
 
 
 
+
+
+mstepcounter = 0
+last_pass = None #whether this is the last pass of the loop
+start_passed = False #whether the start time has been reached
+start_time_tot = time.time()
+year=2013
+
+
+
+#To do sftof to plot!!!!
+
+
+
+for year in years:
+    if year % 4 == 0 and year % 100 != 0:
+        month_days[1] = 29
+    else:
+        month_days[1] = 28
+
+    for i, month in enumerate(months):
+        for day in range(1, month_days[i]+1, 1):
+            # for hour in hours:
+            start_time_epoch = time.time()
+            if last_pass is None:
+                if {"year": year, "month": month, "day": day} == end_time:
+                    start_time["hour"]=0
+                    end_time["hour"]=23
+                    last_pass = [start_time, end_time]  #info to be used for the last pass of the loop
+
+            if not start_passed:
+                if {"year": year, "month": month, "day": day} == start_time:
+                    start_passed = True
+            if start_passed:
+                print("start passed")
+                varlist = ["hus", "phi", "ps.", "ta.", "ua.", "va.", "w", "psl", "sst", "tas", "uas", "vas", ]
+                #ncpath = [os.path.join(netcdf_folder, item) for item in os.listdir(netcdf_folder) if item.endswith(f"{year:04d}{month:02d}{day:02d}.nc")]
+            ##modifb
+                #varlist = ["hus", "huss", "orog", "phi", "ps.", "ta.", "ua.", "va.", "w", "psl", "sst", "tas", "uas", "vas", ]
+                ncpath = [os.path.join(netcdf_folder, item) for item in os.listdir(netcdf_folder) if item.endswith(f"{year:04d}{month:02d}{day:02d}.nc") or item.startswith("orog") or item.startswith("sftof")]
+            ### end modifb
+                for path in ncpath:
+                    for var in varlist:
+                        if path.startswith("/ec/res4/scratch/ecme5801/dowa2013/" + var) == True:
+                            # print(var)
+                            varlist.remove(var)
+                if fill_missing:
+                    if len(varlist)!=0:
+                        mstepcounter += 1
+                        ncpath = previous_existing_step
+                        print(f"Missing time step at {year:04d}/{month:02d}/{day:02d}, using previous existing time step with lead time {mstepcounter*6} hours")
+                    else:
+                        previous_existing_step = ncpath
+                        mstepcounter = 0
+                        mtz(ncpath, nth_point, last_pass, mstepcounter, nc_config=nc_config, zarr_config=zarr_config)
+                else:
+                    if len(varlist)==0:
+                        mtz(ncpath, nth_point, last_pass, mstepcounter, nc_config=nc_config, zarr_config=
+                        zarr_config)
+                    else:
+                        print(f"Missing time step at {year:04d}/{month:02d}/{day:02d}, skipping")
+        print(f"{day}/{month}/{year}:--- {time.time() - start_time_epoch} seconds ---")
+print(f'total time: {time.time()-start_time_tot}')
+
+
+
+
+
+
+###Plot
+from aifs.diagnostics.maps import Coastlines
+from aifs.diagnostics.plots import EquirectangularProjection
+from matplotlib.colors import TwoSlopeNorm
+import numpy as np
+from typing import Optional
+import matplotlib.pyplot as plt
+from textwrap import wrap
+import xarray as xr
+from ecml_tools.data import open_dataset
+
+def scatter_plot_dowa(fig, ax, lon: np.array, lat: np.array, data: np.array, cmap: str = "viridis", s: Optional[float] = 0.5) -> None:
+    """Lat-lon scatter plot: can work with arbitrary grids.
+
+    Parameters
+    ----------
+    fig : _type_
+        Figure object handle
+    ax : _type_
+        Axis object handle
+    lon : np.ndarray
+        longitude coordinates array, shape (lon,)
+    lat : np.ndarray
+        latitude coordinates array, shape (lat,)
+    data : _type_
+        Data to plot
+    cmap : str, optional
+        Colormap string from matplotlib, by default "viridis"
+    title : _type_, optional
+        Title for plot, by default None
+    """
+    psc = ax.scatter(
+        lon,
+        lat,
+        c=data,
+        cmap=cmap,
+        s=10,
+        alpha=1.0,
+        marker='s',
+        norm=TwoSlopeNorm(vcenter=0.0) if cmap == "bwr" else None,
+        rasterized=True,
+    )
+    
+    ax.set_xlim((-0.3, 0.45))
+    ax.set_ylim((0.72, 1.08))
+    return psc
+
+
+
+def ZarrSinglePlotNoBoundaries(fig, ax, ds, var, time):
+    lonlat = np.append(np.expand_dims(ds.latitudes, axis=1),np.expand_dims(ds.longitudes, axis=1), axis = 1)
+    pc = EquirectangularProjection()
+    lat, lon = lonlat[:, 0], lonlat[:, 1]
+    pc_lon, pc_lat = pc(lon, lat)
+    index = ds.name_to_index[var]
+    title = f'{var} at {ds.dates[time]}'
+    ds1 = ds.data[time, index]
+    # calculate variable and plot figure
+    psc = scatter_plot_dowa(fig, ax, pc_lon, pc_lat, ds1, s=10)
+    fig.colorbar(psc, ax=ax)
+    ax.set_title("\n".join(wrap(title, 40)))
+    plt.setp(ax.get_xticklabels(), visible=False)
+    plt.setp(ax.get_yticklabels(), visible=False)
+    ax.tick_params(axis="both", which="both", length=0)
+    ax.set_aspect("auto", adjustable=None)
+    Coastlines().plot_continents(ax)
+    
+
+
+
+#from plots import ZarrSinglePlotNoBoundaries
+ds = open_dataset("/ec/res4/scratch/ecme5801/DOWA_zarr/dowa2013.zarr")
+folder_path = "/ec/res4/hpcperm/ecme5801/DOWA/Plots/"
+res = "5"
+var = "sst"
+var = "2d"
+var = "tp"
+var = "z"
+var = "orog"
+var = "z"
+var = "lsm"
+
+ds.name_to_index
+ds.name_to_index["lsm"]
+
+list_var_surface= ["z"] 
+
+# "sp", "msl", "sst", "10u", "10v",  "2t", "2d", "skt",
+#            "tp", "cp", "tcw", "insolation",
+#            "cos_latitude", "cos_longitude", "sin_latitude", "sin_longitude", 
+#            "cos_julian_day", "sin_julian_day",
+#            "cos_local_time", "sin_local_time"]
+
+list_var_pressure_levels= ["z", "u", "v", "w", "q", "t"]
+#  hus : q
+#   ta : t
+#   ua : u
+#   va : v
+#   w: w
+#   phi : z
+#   ps : sp
+#   psl : msl
+#   sftof : lsm
+#   orography_stddev: sdor  #note that this one and the next one will be be set to zeros for now to indicate that our grid is fine enough
+#   orography_slope: slor
+#   uas : 10u
+#   vas : 10v
+#   tas : 2t
+#   2d : 2d
+#   sst : sst
+#   cp : cp
+#   prrain: tp
+#   cos_latitude : cos_latitude
+#   cos_longitude : cos_longitude
+#   sin_latitude : sin_latitude
+#   sin_longitude : sin_longitude
+#   cos_julian_day : cos_julian_day
+#   cos_local_time : cos_local_time
+#   sin_julian_day : sin_julian_day
+#   sin_local_time : sin_local_time
+#   insolation : insolation
+#   tcw : tcw
+#   tp: tp
+#   lsm: lsm
+#   z: z
+#   ts: skt
+#   huss: q_2m
+  
+os.chdir(folder_path)
+for var in list_var_surface:
+    print(var)
+    time = 0
+    fig, ax = plt.subplots(1,1, figsize=(12,8))
+    ZarrSinglePlotNoBoundaries(fig, ax, ds, var, time)
+    plt.savefig(f'{var}_{ds.dates[time]}.png')
+    plt.close()
+    
+plt.show()
+
+for var in list_var_pressure_levels:
+    for press_lvl in ["_50", "_100", "_150", "_200", "_250", "_300", "_400", "_500", "_600", "_700", "_850", "_925", "_1000"]:
+        var_press=var+press_lvl
+        print(var_press)
+        time = 0
+        fig, ax = plt.subplots(1,1, figsize=(12,8))
+        ZarrSinglePlotNoBoundaries(fig, ax, ds, var_press, time)
+        plt.savefig(f'{var_press}_{ds.dates[time]}.png')
+        plt.close()
+
+
+plt.show() 
+
+
+
+
 #Laboratoire:
 from dataset import Dataset
 ds = Dataset(
@@ -39,7 +263,8 @@ ds = Dataset(
     )  
 ds.projection
 long = ds.longitude
-
+ds.dataset["prrain"].values
+ds.dataset["sst"].values
 arr1=ds.dataset["tas"]
 arr1.values
 arr2=ds.dataset["sst"]
@@ -51,6 +276,16 @@ from gridpp import dewpoint
 import numpy as np
 
 self=ds
+ncpath
+nth_point
+last_pass
+mstepcounter
+#config=nc_config
+zarr_config=zarr_config
+grid_steps = [nth_point, nth_point] #only use every nth point in the x and y directions, this allows for downscaling the meps data.
+lead_length = range(0, 48, 12) #takes every 6th hour from the dataset
+date_index=lead_length[1]
+config = ds.config
 
 def mtz(ds, date_index, grid_steps, config, zarr_config):
     ds.select_coords(grid_steps[0], grid_steps[1])
@@ -148,62 +383,3 @@ def mtz(ds, date_index, grid_steps, config, zarr_config):
 mtz(ncpath, nth_point, last_pass, mstepcounter, nc_config, zarr_config)
 
 #End LAboratoire
-
-
-mstepcounter = 0
-last_pass = None #whether this is the last pass of the loop
-start_passed = False #whether the start time has been reached
-start_time_tot = time.time()
-year=2013
-
-
-
-
-
-
-for year in years:
-    if year % 4 == 0 and year % 100 != 0:
-        month_days[1] = 29
-    else:
-        month_days[1] = 28
-
-    for i, month in enumerate(months):
-        for day in range(1, month_days[i]+1, 1):
-            # for hour in hours:
-            start_time_epoch = time.time()
-            if last_pass is None:
-                if {"year": year, "month": month, "day": day} == end_time:
-                    start_time["hour"]=0
-                    end_time["hour"]=23
-                    last_pass = [start_time, end_time]  #info to be used for the last pass of the loop
-
-            if not start_passed:
-                if {"year": year, "month": month, "day": day} == start_time:
-                    start_passed = True
-            if start_passed:
-                print("start passed")
-                #varlist = ["hus"]#modifb!!!, "phi", "ps.", "ta.", "ua.", "va.", "w", "psl", "sst", "tas", "uas", "vas", ]
-                varlist = ["hus", "huss", "phi", "ps.", "ta.", "ua.", "va.", "w", "psl", "sst", "tas", "uas", "vas", ]
-                ncpath = [os.path.join(netcdf_folder, item) for item in os.listdir(netcdf_folder) if item.endswith(f"{year:04d}{month:02d}{day:02d}.nc")]
-                for path in ncpath:
-                    for var in varlist:
-                        if path.startswith("/ec/res4/scratch/ecme5801/dowa2013/" + var) == True:
-                            # print(var)
-                            varlist.remove(var)
-                if fill_missing:
-                    if len(varlist)!=0:
-                        mstepcounter += 1
-                        ncpath = previous_existing_step
-                        print(f"Missing time step at {year:04d}/{month:02d}/{day:02d}, using previous existing time step with lead time {mstepcounter*6} hours")
-                    else:
-                        previous_existing_step = ncpath
-                        mstepcounter = 0
-                        mtz(ncpath, nth_point, last_pass, mstepcounter, nc_config=nc_config, zarr_config=zarr_config)
-                else:
-                    if len(varlist)==0:
-                        mtz(ncpath, nth_point, last_pass, mstepcounter, nc_config=nc_config, zarr_config=
-                        zarr_config)
-                    else:
-                        print(f"Missing time step at {year:04d}/{month:02d}/{day:02d}, skipping")
-        print(f"{day}/{month}/{year}:--- {time.time() - start_time_epoch} seconds ---")
-print(f'total time: {time.time()-start_time_tot}')

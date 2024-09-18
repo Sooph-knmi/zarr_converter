@@ -143,7 +143,7 @@ class Dataset(Core):
                 dim1len = self.dataset[varname].shape[1]
                 from scipy.ndimage import uniform_filter
                 var_val = self[varname].values.reshape((max_shape[0], dim1len, max_shape[2]*max_shape[3]))  #these parameters have the desired shape, with the second axis being either 1 or 13 in length
-                var_val = uniform_filter(self.dataset[varname].values, axes=[2,3]).reshape((max_shape[0], dim1len, max_shape[2]*max_shape[3]))
+                #var_val = uniform_filter(self.dataset[varname].values, axes=[2,3]).reshape((max_shape[0], dim1len, max_shape[2]*max_shape[3]))
                 
             else:
                 if var_dims == ('time', 'y', 'x'):

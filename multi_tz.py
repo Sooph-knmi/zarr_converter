@@ -54,7 +54,8 @@ for year in years:
             if start_passed:
                 print("start passed")
                 varlist = ["hus", "huss", "phi", "ps.", "ta.", "ua.", "va.", "w", "psl", "sst", "tas", "uas", "vas", ]
-                ncpath = [os.path.join(netcdf_folder, item) for item in os.listdir(netcdf_folder) if item.endswith(f"{year:04d}{month:02d}{day:02d}.nc")]
+                #ncpath = [os.path.join(netcdf_folder, item) for item in os.listdir(netcdf_folder) if item.endswith(f"{year:04d}{month:02d}{day:02d}.nc")]
+                ncpath = [os.path.join(netcdf_folder, item) for item in os.listdir(netcdf_folder) if item.endswith(f"{year:04d}{month:02d}{day:02d}.nc") or item.startswith("orog") or item.startswith("sftof")]
                 for path in ncpath:
                     for var in varlist:
                         if path.startswith("/ec/res4/scratch/ecme5801/dowa2013/" + var) == True:

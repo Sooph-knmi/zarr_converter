@@ -74,14 +74,16 @@ def meps_to_zarr_create(ds, date_index, grid_steps, config, zarr_config):
 
     #CHANGE UNITS OF UPWARD WIND VELOCITY
     ds.change_units
-
+    #print(np.array(ds.dataset['orog']))
     #CALCULATE ADDITIONAL PROPERTIES
     ds.dewpoint_from_specific_humidity
+    #ds.orography_and_land_sea_mask
     # ds.dewpoint #calculates the 2m dewpoint temperature
     # ds.total_column_water #calculate total column water
 
     ds.fill_unimplemented #fills in unimplemented variables with zeros mostly.
-    
+    #print(np.array(ds.dataset['sst']))
+    #print(np.array(ds.dataset['lsm']))
     ds.get_static_properties #calculates sin/cos of lat/lon/day/time and insolation, and adds to dataset
     #GET DATA, VAR_NAMES, STATISTICS:
     data_array, stats = ds.create_data

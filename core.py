@@ -198,12 +198,12 @@ class Core(Data):
         print('DEWPOINT FROM SPECIFIC HUMIDITY')
         tmp_RH=calculate_relative_humidity(arr_tas.values, arr_huss.values, arr_ps.values)   
         dewpoint = calculate_dewpoint(arr_tas.values, tmp_RH)
+        #print(dewpoint)
         print('END DEWPOINT')
 
         self.dataset["2d"] = (arr_tas.dims, dewpoint)
         return self.dataset["2d"]
-    
-    
+        
     @property
     def get_static_properties(self) -> None:
         """
@@ -301,10 +301,10 @@ class Core(Data):
         self.dataset['tcw'] = (fill_dims, np.zeros(fill_shape))
         self.dataset['cp'] = (fill_dims, np.zeros(fill_shape))
         self.dataset['tp'] = (fill_dims, np.zeros(fill_shape))
-        self.dataset['2d'] = (fill_dims, np.zeros(fill_shape))
+        #self.dataset['2d'] = (fill_dims, np.zeros(fill_shape))
         self.dataset['skt'] = (fill_dims, np.zeros(fill_shape))
         self.dataset['lsm'] = (fill_dims, np.zeros(fill_shape))
-        self.dataset['z'] = (fill_dims, np.zeros(fill_shape))
+        #self.dataset['z'] = (fill_dims, np.zeros(fill_shape))
         #Some of these values may be calculable later, but they are set to 0 for now to test the pipeline.
 
         #Masked values
