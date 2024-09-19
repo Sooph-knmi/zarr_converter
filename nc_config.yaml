@@ -1,10 +1,10 @@
 # config file for netcdf input data
 #variables to include in order:
 pvab path: /ec/res4/hpcperm/ecme5801/DOWA/model_levels.txt
-# ps_path: /home/sophiebuurman/dowa-bucket/ps.his.NETHERLANDS.DOWA_40h12tg2_fERA5_ptA.20100101.nc
+
 include:
   - hus
-  - huss
+#  - huss
   - phi
   - ps
   - psl
@@ -17,12 +17,11 @@ include:
   - w
   - vas
   - ts
-  # - prrain
-  - 2d # for now set to 0
+  - 2d 
   - orography_stddev # set to 0 for now
   - orography_slope #both of these are not in meps, will set to zero for now
   - cp #for now set to 0
-  # - tp #for now set to 0
+#  - tp #for now set to 0
   - cos_latitude
   - cos_longitude
   - sin_latitude
@@ -34,7 +33,10 @@ include:
   - insolation
   - tcw # for now set to 0
   - lsm
-  - z
+  - orog
+  - sftof
+#  - z
+  - prrain
     # include:
 #   - specific_humidity_pl
 #   - air_temperature_pl
@@ -86,7 +88,7 @@ mapping:
   phi : z
   ps : sp
   psl : msl
-  Sftof : lsm
+  sftof : lsm
   orography_stddev: sdor  #note that this one and the next one will be be set to zeros for now to indicate that our grid is fine enough
   orography_slope: slor
   uas : 10u
@@ -106,11 +108,12 @@ mapping:
   sin_local_time : sin_local_time
   insolation : insolation
   tcw : tcw
-  tp: tp
+#  tp: tp
   lsm: lsm
-  z: z
+  #z: z dint fill the zeros
   ts: skt
-  huss: q_2m
+#  huss: q_2m
+  orog: z
 # SFX_DSN_T_ISBA : sd
 
   
