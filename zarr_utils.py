@@ -145,9 +145,8 @@ def w2omega(w, T, p):
     """
     Rd = 287.058  # specific gas constant for dry air 
     g = 9.81  # gravitational acceleration
-    
-    omega = -w*g*p / (T*Rd)
 
+    omega = -w*g*p/(T*Rd)
     return omega
 def change_units_func(p_levels, w, ta, lat):
         return xr.apply_ufunc(change_units_numba,
@@ -331,8 +330,8 @@ def rotate(x_wind, y_wind, lats, lons, proj_str_from, proj_str_to="proj+=longlat
         # Ensure the wind speed is not changed (which might not the case since the units in longlat
         # is degrees, not meters)
         curr_speed = np.sqrt(new_x_wind**2 + new_y_wind**2)
-        new_x_wind *= orig_speed / curr_speed
-        new_y_wind *= orig_speed / curr_speed
+        new_x_wind *= np.divide(orig_speed, curr_speed, out = np.zeros_like(orig_speed), where=curr_speed!=0)
+        new_y_wind *= np.divide(orig_speed, curr_speed, out = np.zeros_like(orig_speed), where=curr_speed!=0)
 
     return new_x_wind, new_y_wind
 

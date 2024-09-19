@@ -33,7 +33,7 @@ def meps_to_zarr(
         # nc_config["include"] = (nc_path.partition("/")[-1]).partition(".")[0]
         ds = Dataset(
         path=nc_path,  #I probably should have dataset load the config files directly instead of sending them in as function arguments.
-        chunks={},  #convert.py is not parallelized, so no need to chunk
+        chunks={"time": 1},  #convert.py is not parallelized, so no need to chunk
         decode_times=True, #we want times in datetime64 format
         config=nc_config,
         )   

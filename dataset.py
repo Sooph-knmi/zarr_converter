@@ -159,8 +159,8 @@ class Dataset(Core):
                     var_val = self.dataset[varname].values.flatten()
                     var_val = var_val[np.newaxis, np.newaxis, ...].repeat(max_shape[0], axis = 0) 
 
-            # var_vals.append(np.nan_to_num(var_val))      
-            var_vals.append(var_val)
+            var_vals.append(np.nan_to_num(var_val))   
+            # var_vals.append(var_val)
         #COLLECT DATA AND CALCULATE STATISTICS
         data_array = np.concatenate(var_vals, axis=1)
         stats = self.alt_statistics(data=data_array)  #statistics should be in float64, but the data should be in float32

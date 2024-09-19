@@ -32,11 +32,10 @@ include:
   - sin_local_time
   - insolation
   - tcw # for now set to 0
-  - lsm
   - orog
   - sftof
 #  - z
-  - prrain
+  # - prrain
     # include:
 #   - specific_humidity_pl
 #   - air_temperature_pl
@@ -108,8 +107,8 @@ mapping:
   sin_local_time : sin_local_time
   insolation : insolation
   tcw : tcw
-#  tp: tp
-  lsm: lsm
+  tp: tp
+  sftof: lsm
   #z: z dint fill the zeros
   ts: skt
 #  huss: q_2m
