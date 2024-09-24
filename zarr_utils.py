@@ -148,6 +148,7 @@ def w2omega(w, T, p):
 
     omega = -w*g*p/(T*Rd)
     return omega
+
 def change_units_func(p_levels, w, ta, lat):
         return xr.apply_ufunc(change_units_numba,
                        w,
@@ -172,7 +173,7 @@ def change_units_numba(w, ta, lat, plevels):
             t_pl = ta[t, h, ...].flatten()
             p_pl = plevels[h] * 100
             w_new[t, h, ...] = np.reshape(w2omega(w_pl, t_pl, p_pl), lat.shape)
-        return w_new
+    return w_new
 
 @jit(nopython=True)
 def data_to_zarr_numba(var_val):
@@ -235,12 +236,19 @@ def calculate_relative_humidity(arr1: np.ndarray, arr2: np.ndarray, arr3: np.nda
         tmp_array_SHS = np.zeros_like(arr1)
         res_array_RH = np.zeros_like(arr1)
         
-        #1. Compute Saturation Vapor Pressure (for ps in Pa, tas in K, see. Lawrence 2004)
-        tmp_array_es=610.94*np.exp(17.625*(arr1-273.15)/(arr1-273.15+243.04))
-        #2. Compute Specific Humidity at Saturation
-        tmp_array_SHS=(0.622*tmp_array_es)/(arr3-(0.378*tmp_array_es))
-        #3. Compute relative humidity
-        res_array_RH=(arr2/tmp_array_SHS)*100
+        #1. Compute Saturation Vapor Pressure (for ps in Pa, tas in K, see. Lawrence 2004, Magnus forumla)
+        tmp_array_es=610.94*np.exp(17.625*(arr1-273.15)/(arr1-273.15+243.04))        
+        #2. Compute Actual Vapor pressure
+        tmp_actual_vapor_pressure=(arr2*arr3)/(0.622+0.378*arr2)
+        #3. Compute relative humidity (do not multiply by 100 for gridpp)
+        res_array_RH=(tmp_actual_vapor_pressure/tmp_array_es)
+        
+        # Old version
+        # #2. Compute Specific Humidity at Saturation
+        # tmp_array_SHS=(0.622*tmp_array_es)/(arr3-(0.378*tmp_array_es))
+        # #3. Compute relative humidity
+        # res_array_RH=(arr2/tmp_array_SHS)
+        
         return res_array_RH
 
 

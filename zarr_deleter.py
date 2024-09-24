@@ -2,8 +2,10 @@ import os
 from ecml_tools.data import open_dataset
 import numpy as np
 # Paths
-nc_files_path = "/home/sophiebuurman/dowa-bucket/dowa_4years/dowa2015"
-zarr_path = "/home/sophiebuurman/data1/data2/zarr_converter/output/dowa2008.zarr"
+# nc_files_path = "/home/sophiebuurman/dowa-bucket/dowa_4years/dowa2015"
+# zarr_path = "/home/sophiebuurman/data1/data2/zarr_converter/output/dowa2008.zarr"
+nc_files_path = "/ec/res4/scratch/ecme5801/dowa2013"
+zarr_path = "/ec/res4/scratch/ecme5801/DOWA_zarr/dowa2013.zarr"
 
 # Ensure the Zarr dates folder exists
 if not os.path.isdir(zarr_path):

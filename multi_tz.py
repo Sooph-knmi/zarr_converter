@@ -3,29 +3,35 @@ from add_end_data_separately import add_end_data
 import glob, os
 import time
 
-zarr_config = '/hpcperm/nld1247/zarr_converter/zarr_config.yaml'
-nc_config= '/hpcperm/nld1247/zarr_converter//nc_config.yaml'
-netcdf_folder = "/ec/res4/scratch/nld1247/dowa0812/"
+#Sophie's path
+# zarr_config = '/hpcperm/nld1247/zarr_converter/zarr_config.yaml'
+# nc_config= '/hpcperm/nld1247/zarr_converter//nc_config.yaml'
+# netcdf_folder = "/ec/res4/scratch/nld1247/dowa0812/"
+
+#Bastien's path
+zarr_config = '/ec/res4/hpcperm/ecme5801/DOWA/zarr_converter/zarr_config.yaml'
+nc_config= '/ec/res4/hpcperm/ecme5801/DOWA/zarr_converter/nc_config.yaml'
+netcdf_folder = "/ec/res4/scratch/ecme5801/dowa2013/"
 
 frequency = 3
 nth_point = 1
 fill_missing = False #whether to fill missing time steps with previous time step, or to skip if False
 
 start_time = {
-    "year": 2008,
+    "year": 2013,
     "month": 1,
     "day": 1,
 }
 
 end_time = {
-    "year": 2008,
+    "year": 2013,
     "month": 12,
     "day": 31,
 }
 
 months = range(1, 13)
 month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-years = [2008]
+years = [2013]
 
 
 mstepcounter = 0
