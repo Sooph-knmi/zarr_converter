@@ -49,6 +49,8 @@ class Dataset(Core):
 
         if kwargs["concat_axis"]:
             self._axis = kwargs["concat_axis"]
+            print("RECEIVED AXIS")
+            print(self._axis)
 
         if kwargs["concat"]:
            
@@ -140,7 +142,7 @@ class Dataset(Core):
             var_dims = self.dataset[varname].dims   #Shape of the variable
             if len(var_dims) == 4 and set(('time', 'y', 'x')).issubset(var_dims):
                 dim1len = self.dataset[varname].shape[1]
-                from scipy.ndimage import uniform_filter
+                # from scipy.ndimage import uniform_filter
                 var_val = self[varname].values.reshape((max_shape[0], dim1len, max_shape[2]*max_shape[3]))  #these parameters have the desired shape, with the second axis being either 1 or 13 in length
                 #var_val = uniform_filter(self.dataset[varname].values, axes=[2,3]).reshape((max_shape[0], dim1len, max_shape[2]*max_shape[3]))
                 
@@ -159,11 +161,12 @@ class Dataset(Core):
                     var_val = self.dataset[varname].values.flatten()
                     var_val = var_val[np.newaxis, np.newaxis, ...].repeat(max_shape[0], axis = 0) 
 
-            var_vals.append(np.nan_to_num(var_val))   
-            # var_vals.append(var_val)
+            # var_vals.append(np.nan_to_num(var_val))   
+            var_vals.append(var_val)
         #COLLECT DATA AND CALCULATE STATISTICS
         data_array = np.concatenate(var_vals, axis=1)
         stats = self.alt_statistics(data=data_array)  #statistics should be in float64, but the data should be in float32
+        # stats = self.statistics(data=data_array)
         data_array = data_array.astype(np.float32)
 
         data_array = data_array[:, :, np.newaxis, :]   #adds the ensemble dimension to the data
@@ -187,11 +190,12 @@ class Dataset(Core):
                 dict of statistics
         
         """
+        axes = (0,2)
         return {
-            "squares": self.squares(axis = self._axis),
-            "sums" : self.sums(axis=self._axis),
-            "max" : self.maxValue(axis= self._axis),
-            "min" : self.minValue(axis = self._axis),
+            "squares": self.squares(axis = axes),
+            "sums" : self.sums(axis = axes),
+            "max" : self.maxValue(axis = axes),
+            "min" : self.minValue(axis = axes),
             "count" : [self.dataset.shape[0]*self.dataset.shape[2]]*self.dataset.shape[1]
         }
     
@@ -203,10 +207,10 @@ class Dataset(Core):
         axes = (0,2) #axis 0 should be 1 element, or multiple if ensemble, maybe then sum not wanted?
         print("calculation sum of squares")
         return {
-            "squares": np.sum(data**2, axis = axes),
-            "sums" : np.sum(data, axis = axes),
-            "maximum" : np.max(data, axis = axes), #NOTE: Should be named maximum to be consistent with era
-            "minimum" : np.min(data, axis = axes), #NOTE: Should be named minimum to be consistent with era
+            "squares": np.nansum(data**2, axis = axes),
+            "sums" : np.nansum(data, axis = axes),
+            "maximum" : np.nanmax(data, axis = axes), #NOTE: Should be named maximum to be consistent with era
+            "minimum" : np.nanmin(data, axis = axes), #NOTE: Should be named minimum to be consistent with era
             "count" : np.array([data.shape[0]*data.shape[2]]*data.shape[1], dtype = np.int64)
         }
 

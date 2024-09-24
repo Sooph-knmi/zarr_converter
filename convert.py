@@ -39,9 +39,9 @@ def meps_to_zarr(
         )   
         config = ds.config
         print("date", ds.dates[date_index])
-        if os.path.exists("/hpcperm/nld1247/zarr_converter/output/test.zarr"):
+        if os.path.exists("/hpcperm/nld1247/zarr_converter/output/test_with_nan.zarr"):
             print("path exists")
-            anemoi_zarr = open_dataset("/hpcperm/nld1247/zarr_converter/output/test.zarr")
+            anemoi_zarr = open_dataset("/hpcperm/nld1247/zarr_converter/output/test_with_nan.zarr")
             if np.array(ds.dataset["time"])[date_index] in anemoi_zarr.dates:
                 print("date already exists, skipping")
                 pass
@@ -78,7 +78,7 @@ def meps_to_zarr_create(ds, date_index, grid_steps, config, zarr_config):
     #print(np.array(ds.dataset['orog']))
     #CALCULATE ADDITIONAL PROPERTIES
     ds.dewpoint_from_specific_humidity
-    #ds.orography_and_land_sea_mask
+    # ds.orography_and_land_sea_mask
     # ds.dewpoint #calculates the 2m dewpoint temperature
     # ds.total_column_water #calculate total column water
 

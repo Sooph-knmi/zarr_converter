@@ -16,6 +16,7 @@ from matplotlib import colormaps
 import random
 from pyshtools.expand import SHExpandGLQ, SHGLQ
 import numpy as np
+import matplotlib.colors as colors
 
 
 
@@ -248,11 +249,13 @@ def scatter_plot_dowa(fig, ax, lon: np.array, lat: np.array, data: np.array, cma
         lat,
         c=data,
         cmap=cmap,
-        s=10,
+        s=0.1,
         alpha=1.0,
         marker='s',
         norm=TwoSlopeNorm(vcenter=0.0) if cmap == "bwr" else None,
         rasterized=True,
+        # vmin=-0.05,
+        # vmax=0.05
     )
     
     ax.set_xlim((-0.3, 0.45))
@@ -559,9 +562,9 @@ def ZarrSinglePlotNoBoundaries(fig, ax, ds, var, time):
     index = ds.name_to_index[var]
     title = f'{var} at {ds.dates[time]}'
     ds1 = ds.data[time, index]
-    ds1[ds1 == 0] = np.nan
+    # ds1[ds1 == 0] = np.nan
     # calculate variable and plot figure
-    psc = scatter_plot_dowa(fig, ax, pc_lon, pc_lat, ds1, s=10)
+    psc = scatter_plot_dowa(fig, ax, pc_lon, pc_lat, ds1, s=5)
     fig.colorbar(psc, ax=ax)
     ax.set_title("\n".join(wrap(title, 40)))
     plt.setp(ax.get_xticklabels(), visible=False)

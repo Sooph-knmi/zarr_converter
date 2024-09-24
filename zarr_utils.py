@@ -148,6 +148,8 @@ def w2omega(w, T, p):
 
     omega = -w*g*p/(T*Rd)
     return omega
+
+
 def change_units_func(p_levels, w, ta, lat):
         return xr.apply_ufunc(change_units_numba,
                        w,
@@ -171,6 +173,7 @@ def change_units_numba(w, ta, lat, plevels):
             w_pl = w[t, h, ...].flatten()
             t_pl = ta[t, h, ...].flatten()
             p_pl = plevels[h] * 100
+            
             w_new[t, h, ...] = np.reshape(w2omega(w_pl, t_pl, p_pl), lat.shape)
         return w_new
 
@@ -434,11 +437,11 @@ def model_to_pressure_levels_numba(ps, target_pressure_levels, par, t, PVAB):
                 if idx == 0:
                     # alpha = (pl - array[0]) / (array[20] - array[0])
                     #print(f"Extrapolating left: pl={pl}, alpha={alpha}, par0={par[t, 0, j, k]}, par1={par[t, 1, j, k]}")
-                    parout[j, k, p] = 0#par[t, 0, j, k] + alpha * (par[t, 20, j, k] - par[t, 0, j, k])
+                    parout[j, k, p] = np.nan #par[t, 0, j, k] + alpha * (par[t, 20, j, k] - par[t, 0, j, k])
                 elif idx == len(array):
                     # alpha = (pl - array[-20]) / (array[-1] - array[-20])
                     #print(f"Extrapolating right: pl={pl}, alpha={alpha}, parN-2={par[t, -2, j, k]}, parN-1={par[t, -1, j, k]}")
-                    parout[j, k, p] = 0#par[t, -20, j, k] + alpha * (par[t, -1, j, k] - par[t, -20, j, k])
+                    parout[j, k, p] = np.nan #par[t, -20, j, k] + alpha * (par[t, -1, j, k] - par[t, -20, j, k])
                 else:
                     alpha = (pl - array[idx-1]) / (array[idx] - array[idx-1])
                     #print(f"Interpolating: pl={pl}, alpha={alpha}, parIdx-1={par[t, idx-1, j, k]}, parIdx={par[t, idx, j, k]}")

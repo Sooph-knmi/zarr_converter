@@ -46,7 +46,7 @@ class Core(Data):
         #dim1 = axis[0]
         # TODO: temp solution down below
 
-        _sum = np.sum([np.nansum(chunk, axis=1) for chunk in self.dataset], axis= 0)
+        _sum = np.nansum([np.nansum(chunk, axis=1) for chunk in self.dataset], axis= 0)
         
         #self.cache["sums"] = (_sum, axis)
         return _sum
