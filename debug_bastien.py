@@ -1,104 +1,3 @@
-# from convert import meps_to_zarr as mtz
-# from add_end_data_separately import add_end_data
-# import glob, os
-# import time
-
-# zarr_config = '/ec/res4/hpcperm/ecme5801/DOWA/zarr_converter/zarr_config.yaml'
-# nc_config= '/ec/res4/hpcperm/ecme5801/DOWA/zarr_converter/nc_config.yaml'
-# netcdf_folder = "/ec/res4/scratch/ecme5801/dowa2013"
-# #
-# frequency = 3
-# nth_point = 1
-# fill_missing = False #whether to fill missing time steps with previous time step, or to skip if False
-
-# start_time = {
-#     "year": 2013,
-#     "month": 1,
-#     "day": 1,
-# }
-
-# end_time = {
-#     "year": 2013,
-#     "month": 1,
-#     "day": 2,
-# }
-
-# months = range(1, 13)
-# month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-# years = [2013]
-
-
-
-
-
-# mstepcounter = 0
-# last_pass = None #whether this is the last pass of the loop
-# start_passed = False #whether the start time has been reached
-# start_time_tot = time.time()
-# year=2013
-
-
-
-# #To do sftof to plot!!!!
-
-
-
-# for year in years:
-#     if year % 4 == 0 and year % 100 != 0:
-#         month_days[1] = 29
-#     else:
-#         month_days[1] = 28
-
-#     for i, month in enumerate(months):
-#         for day in range(1, month_days[i]+1, 1):
-#             # for hour in hours:
-#             start_time_epoch = time.time()
-#             if last_pass is None:
-#                 if {"year": year, "month": month, "day": day} == end_time:
-#                     start_time["hour"]=0
-#                     end_time["hour"]=23
-#                     last_pass = [start_time, end_time]  #info to be used for the last pass of the loop
-
-#             if not start_passed:
-#                 if {"year": year, "month": month, "day": day} == start_time:
-#                     start_passed = True
-#             if start_passed:
-#                 print("start passed")
-#                 varlist = ["hus", "phi", "ps.", "ta.", "ua.", "va.", "w", "psl", "sst", "tas", "uas", "vas", ]
-#                 #ncpath = [os.path.join(netcdf_folder, item) for item in os.listdir(netcdf_folder) if item.endswith(f"{year:04d}{month:02d}{day:02d}.nc")]
-#             ##modifb
-#                 #varlist = ["hus", "huss", "orog", "phi", "ps.", "ta.", "ua.", "va.", "w", "psl", "sst", "tas", "uas", "vas", ]
-#                 ncpath = [os.path.join(netcdf_folder, item) for item in os.listdir(netcdf_folder) if item.endswith(f"{year:04d}{month:02d}{day:02d}.nc") or item.startswith("orog") or item.startswith("sftof")]
-#             ### end modifb
-#                 for path in ncpath:
-#                     for var in varlist:
-#                         if path.startswith("/ec/res4/scratch/ecme5801/dowa2013/" + var) == True:
-#                             # print(var)
-#                             varlist.remove(var)
-#                 if fill_missing:
-#                     if len(varlist)!=0:
-#                         mstepcounter += 1
-#                         ncpath = previous_existing_step
-#                         print(f"Missing time step at {year:04d}/{month:02d}/{day:02d}, using previous existing time step with lead time {mstepcounter*6} hours")
-#                     else:
-#                         previous_existing_step = ncpath
-#                         mstepcounter = 0
-#                         mtz(ncpath, nth_point, last_pass, mstepcounter, nc_config=nc_config, zarr_config=zarr_config)
-#                 else:
-#                     if len(varlist)==0:
-#                         mtz(ncpath, nth_point, last_pass, mstepcounter, nc_config=nc_config, zarr_config=
-#                         zarr_config)
-#                     else:
-#                         print(f"Missing time step at {year:04d}/{month:02d}/{day:02d}, skipping")
-#         print(f"{day}/{month}/{year}:--- {time.time() - start_time_epoch} seconds ---")
-# print(f'total time: {time.time()-start_time_tot}')
-
-
-
-
-
-
-
 ###Plot
 from aifs.diagnostics.maps import Coastlines
 from aifs.diagnostics.plots import EquirectangularProjection
@@ -229,9 +128,9 @@ def ZarrSinglePlotNoBoundaries_dewpointdiff_bastien(fig, ax, ds, var, var2, time
     Coastlines().plot_continents(ax)
 
 #from plots import ZarrSinglePlotNoBoundaries
-ds = open_dataset("/ec/res4/scratch/ecme5801/DOWA_zarr/test.zarr")
+ds = open_dataset("/ec/res4/scratch/ecme5801/DOWA_zarr/test_fullday.zarr")
 folder_path = "/ec/res4/hpcperm/ecme5801/DOWA/Plots/"
-folder_path = "/ec/res4/hpcperm/ecme5801/DOWA/zarr_converter/"
+folder_path = "/ec/res4/hpcperm/ecme5801/DOWA/zarr_converter/output/plots_bastien/"
 res = "5"
 var = "sst"
 var = "2d"
@@ -241,6 +140,59 @@ var = "orog"
 var = "z"
 var = "w"
 
+list_var_surface= [ "sp", "msl", "sst", "2t", "10u", "10v", "skt", "2d", "sdor", "slor", "cp",
+                   "cos_latitude", "cos_longitude", "sin_latitude", "sin_longitude", 
+                    "cos_julian_day", "sin_julian_day",
+                    "cos_local_time", "sin_local_time", "insolation", "tcw", "z", "lsm"]
+
+list_var_pressure_levels= ["q", "z", "t", "u", "v",  "w"]
+
+  
+os.chdir(folder_path)
+for var in list_var_surface:
+    print(var)
+    for time in range(0,4):
+        #time = 0
+        print(time)
+        fig, ax = plt.subplots(1,1, figsize=(12,8))
+        ZarrSinglePlotNoBoundaries(fig, ax, ds, var, time)
+        plt.savefig(f'{var}_{ds.dates[time]}.png')
+        plt.close()
+        
+    # fig, ax = plt.subplots(1,1, figsize=(12,8))
+    # ZarrSinglePlotNoBoundaries_dewpoint_bastien(fig, ax, ds, "2t", "2d", time)
+    # plt.savefig(f'bool_2t_2d_{ds.dates[time]}.png')
+    # plt.close()
+    
+    # print(var)
+    # fig, ax = plt.subplots(1,1, figsize=(12,8))
+    # ZarrSinglePlotNoBoundaries_dewpointdiff_bastien(fig, ax, ds, "2t", "2d", time)
+    # plt.savefig(f'diff_2t_2d_{ds.dates[time]}.png')
+    # plt.close()
+    
+
+    
+
+
+for var in list_var_pressure_levels:
+    for press_lvl in ["_850",  "_925", "_1000", "_50", "_100", "_150", "_200", "_250", "_300", "_400", "_500", "_600", "_700"]:
+        var_press=var+press_lvl
+        print(var_press)
+        
+        for time in range(0,4):
+        #time = 0
+            print(time)
+            fig, ax = plt.subplots(1,1, figsize=(12,8))
+            ZarrSinglePlotNoBoundaries(fig, ax, ds, var_press, time)
+            plt.savefig(f'{var_press}_{ds.dates[time]}.png')
+            plt.close()
+
+        #plt.savefig(f'{var_press}_{ds.dates[time]}_zoom_in_msm1_v2.png')
+
+        # fig, ax = plt.subplots(1,1, figsize=(12,8))
+        # ZarrSinglePlotNoBoundaries_bastien(fig, ax, ds, var_press, time)
+        # plt.savefig(f'{var_press}_{ds.dates[time]}_bool.png')
+        # plt.close()
 
 ds.name_to_index
 ds.name_to_index["2t"]
@@ -273,13 +225,7 @@ fig = plt.figure(figsize =(10, 7))
 plt.boxplot(ds.data[0, 82])
 plt.show()
 
-list_var_surface= [ "2t", "2d"], "skt", "z", "sp", "msl", "sst", "10u", "10v", 
-           "tp", "cp", "tcw", "insolation",
-           "cos_latitude", "cos_longitude", "sin_latitude", "sin_longitude", 
-           "cos_julian_day", "sin_julian_day",
-           "cos_local_time", "sin_local_time"]
 
-list_var_pressure_levels= ["w"]#"w"]#"z", "u", "v", "w", "q", "t"]
 #  hus : q
 #   ta : t
 #   ua : u
@@ -313,47 +259,7 @@ list_var_pressure_levels= ["w"]#"w"]#"z", "u", "v", "w", "q", "t"]
 #   z: z
 #   ts: skt
 #   huss: q_2m
-  
-os.chdir(folder_path)
-for var in list_var_surface:
-    print(var)
-    time = 3
-    fig, ax = plt.subplots(1,1, figsize=(12,8))
-    ZarrSinglePlotNoBoundaries_dewpoint_bastien(fig, ax, ds, "2t", "2d", time)
-    plt.savefig(f'bool_2t_2d_{ds.dates[time]}.png')
-    plt.close()
-    
-    print(var)
-    fig, ax = plt.subplots(1,1, figsize=(12,8))
-    ZarrSinglePlotNoBoundaries_dewpointdiff_bastien(fig, ax, ds, "2t", "2d", time)
-    plt.savefig(f'diff_2t_2d_{ds.dates[time]}.png')
-    plt.close()
-    
-    print(var)
-    fig, ax = plt.subplots(1,1, figsize=(12,8))
-    ZarrSinglePlotNoBoundaries(fig, ax, ds, var, time)
-    plt.savefig(f'{var}_{ds.dates[time]}.png')
-    plt.close()
-    
 
-
-    
-plt.show()
-
-for var in list_var_pressure_levels:
-    for press_lvl in ["_850",  "_925", "_1000", "_50", "_100", "_150", "_200", "_250", "_300", "_400", "_500", "_600", "_700", "_850"]:
-        var_press=var+press_lvl
-        print(var_press)
-        time = 0
-        fig, ax = plt.subplots(1,1, figsize=(12,8))
-        ZarrSinglePlotNoBoundaries(fig, ax, ds, var_press, time)
-        plt.savefig(f'{var_press}_{ds.dates[time]}_zoom_in_msm1_v2.png')
-        plt.close()
-
-        # fig, ax = plt.subplots(1,1, figsize=(12,8))
-        # ZarrSinglePlotNoBoundaries_bastien(fig, ax, ds, var_press, time)
-        # plt.savefig(f'{var_press}_{ds.dates[time]}_bool.png')
-        # plt.close()
 
 
 plt.show() 
