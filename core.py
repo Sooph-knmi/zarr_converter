@@ -196,7 +196,7 @@ class Core(Data):
         arr_ps = self.dataset["ps"]
         
         print('DEWPOINT FROM SPECIFIC HUMIDITY')
-        tmp_RH=calculate_relative_humidity(arr_tas.values, arr_huss.values, arr_ps.values)   
+        tmp_RH=calculate_relative_humidity(arr_tas.values, arr_huss.values, arr_ps.values)
         dewpoint = calculate_dewpoint(arr_tas.values, tmp_RH)
         #print(dewpoint)
         print('END DEWPOINT')
