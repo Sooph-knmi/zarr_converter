@@ -13,19 +13,19 @@ fill_missing = False #whether to fill missing time steps with previous time step
 
 start_time = {
     "year": 2008,
-    "month": 1,
+    "month": 6,
     "day": 1,
 }
 
 end_time = {
-    "year": 2008,
-    "month": 12,
+    "year": 2012,
+    "month": 30,
     "day": 31,
 }
-
-months = range(1, 13)
+months = range(12)
+# months = [7]
 month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-years = [2008]
+years = [2008, 2009, 2010, 2012]
 
 
 mstepcounter = 0

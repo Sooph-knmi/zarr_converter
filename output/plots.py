@@ -254,8 +254,8 @@ def scatter_plot_dowa(fig, ax, lon: np.array, lat: np.array, data: np.array, cma
         marker='s',
         norm=TwoSlopeNorm(vcenter=0.0) if cmap == "bwr" else None,
         rasterized=True,
-        # vmin=-0.05,
-        # vmax=0.05
+        vmin=-10,
+        vmax=10
     )
     
     ax.set_xlim((-0.3, 0.45))
