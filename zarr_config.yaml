@@ -1,6 +1,6 @@
 # store: /lustre/storeB/project/nwp/aifs/datasets/aifs-meps-5km-2020-2023-6h-nofill-v1.zarr
 # store: '/home/sophiebuurman/data1/data2/zarr_converter/output/dowa2008.zarr'
-store: '/hpcperm/nld1247/zarr_converter/output/test_summer.zarr'
+store: '/ec/res4/scratch/nld1247/output/dowa_2008-2012.zarr'
 
 
 #  /lustre/storeB/project/nwp/aifs/datasets/aifs-meps-5km-2020-2023-6h-nofill-v1.zarr

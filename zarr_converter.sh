@@ -5,7 +5,7 @@
 #SBATCH --gpus-per-node=0
 #SBATCH --cpus-per-task=32
 #SBATCH --mem=64GB
-#SBATCH --time=2:00:00
+#SBATCH --time=48:00:00
 #SBATCH --job-name=zarr_conv_dowa
 
 # debugging flags (optional)

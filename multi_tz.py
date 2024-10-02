@@ -4,14 +4,14 @@ import glob, os
 import time
 
 #Sophie's path
-# zarr_config = '/hpcperm/nld1247/zarr_converter/zarr_config.yaml'
-# nc_config= '/hpcperm/nld1247/zarr_converter//nc_config.yaml'
-# netcdf_folder = "/ec/res4/scratch/nld1247/dowa0812/"
+zarr_config = '/hpcperm/nld1247/zarr_converter/zarr_config.yaml'
+nc_config= '/hpcperm/nld1247/zarr_converter//nc_config.yaml'
+netcdf_folder = "/ec/res4/scratch/nld1247/dowa0812/"
 
 #Bastien's path
-zarr_config = '/ec/res4/hpcperm/ecme5801/DOWA/zarr_converter/zarr_config.yaml'
-nc_config= '/ec/res4/hpcperm/ecme5801/DOWA/zarr_converter/nc_config.yaml'
-netcdf_folder = "/ec/res4/scratch/ecme5801/dowa2013/"
+# zarr_config = '/ec/res4/hpcperm/ecme5801/DOWA/zarr_converter/zarr_config.yaml'
+# nc_config= '/ec/res4/hpcperm/ecme5801/DOWA/zarr_converter/nc_config.yaml'
+# netcdf_folder = "/ec/res4/scratch/ecme5801/dowa2013/"
 
 frequency = 3
 nth_point = 1
@@ -19,7 +19,7 @@ fill_missing = False #whether to fill missing time steps with previous time step
 
 start_time = {
     "year": 2008,
-    "month": 6,
+    "month": 1,
     "day": 1,
 }
 
@@ -28,7 +28,8 @@ end_time = {
     "month": 30,
     "day": 31,
 }
-months = range(12)
+months = range(1, 13)
+# months = [12]
 # months = [7]
 month_days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 years = [2008, 2009, 2010, 2012]
@@ -36,7 +37,7 @@ years = [2008, 2009, 2010, 2012]
 
 mstepcounter = 0
 last_pass = None #whether this is the last pass of the loop
-start_passed = False #whether the start time has been reached
+start_passed = True #whether the start time has been reached
 start_time_tot = time.time()
 for year in years:
     if year % 4 == 0 and year % 100 != 0:

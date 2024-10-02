@@ -38,8 +38,6 @@ class Dataset(Core):
             return:
                 returns a dataset of type np.ndarray with a given shape. 
         
-        
-        
         """
         if kwargs["config"]:
             self.to_include = self.config["include"]

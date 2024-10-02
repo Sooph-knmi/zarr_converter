@@ -570,6 +570,9 @@ def add_dataset(
         try:
             if add_method == "append":
                 store_root[name].append(data = arr, axis=0)
+                # print(data)
+                # print(data.type)
+                # store_root[name] = np.arange(np.datetime64("2008-01-01"), data[0], np.timedelta64(6, 'h'), dtype='datetime64[s]')
 
             elif add_method == "add_to_array":
                 #there's probably a zarr native way to do this, but for now this will do.

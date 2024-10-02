@@ -39,19 +39,19 @@ def meps_to_zarr(
         )   
         config = ds.config
         print("date", ds.dates[date_index])
-        if os.path.exists("/hpcperm/nld1247/zarr_converter/output/test_with_nan.zarr"):
+        if os.path.exists('/ec/res4/scratch/nld1247/output/dowa_2008-2012.zarr'):
             print("path exists")
-            anemoi_zarr = open_dataset("/hpcperm/nld1247/zarr_converter/output/test_with_nan.zarr")
+            anemoi_zarr = open_dataset('/ec/res4/scratch/nld1247/output/dowa_2008-2012.zarr')
             if np.array(ds.dataset["time"])[date_index] in anemoi_zarr.dates:
                 print("date already exists, skipping")
                 pass
             else:
-                meps_to_zarr_create(ds, date_index, grid_steps, config, zarr_config)
+                meps_to_zarr_create(ds, date_index, grid_steps, config, zarr_config, last_pass)
                 print("adding to dataset")
         else:
-            meps_to_zarr_create(ds, date_index, grid_steps, config, zarr_config)
+            meps_to_zarr_create(ds, date_index, grid_steps, config, zarr_config, last_pass)
                 
-def meps_to_zarr_create(ds, date_index, grid_steps, config, zarr_config):
+def meps_to_zarr_create(ds, date_index, grid_steps, config, zarr_config, last_pass):
     ds.select_coords(grid_steps[0], grid_steps[1])
 
     print("date", ds.dates[date_index])
@@ -99,52 +99,52 @@ def meps_to_zarr_create(ds, date_index, grid_steps, config, zarr_config):
         stats = stats,
     )
 
-# if last_pass is not None:
-    tz = ToZarr(config = zarr_config)
-    start_time = {
-        "year": 2013,
-        "month": 1,
-        "day": 1,
-        "hour": 00
-    }
-    # start_time = {
-    #     "year": 2020,
-    #     "month": 2,
-    #     "day": 5,
-    #     "hour": 0
-    # }
+    if last_pass is not None:
+        tz = ToZarr(config = zarr_config)
+        start_time = {
+            "year": 2008,
+            "month": 1,
+            "day": 1,
+            "hour": 00
+        }
+        # start_time = {
+        #     "year": 2020,
+        #     "month": 2,
+        #     "day": 5,
+        #     "hour": 0
+        # }
 
-    end_time = {
-        "year": 2013,
-        "month": 12,
-        "day": 31,
-        "hour": 00
-    }
-    last_pass = [start_time, end_time]
-    var_labels, map_dict = ds.get_var_names
-    print("Aggregating statistics")
-    tz.aggregate()
-    tz.registry.update_history("Added dataset")
+        end_time = {
+            "year": 2012,
+            "month": 12,
+            "day": 31,
+            "hour": 18
+        }
+        last_pass = [start_time, end_time]
+        var_labels, map_dict = ds.get_var_names
+        print("Aggregating statistics")
+        tz.aggregate()
+        tz.registry.update_history("Added dataset")
 
-    print("Adding metadata")
-    tz.registry.add_basic_metadata(start_date = last_pass[0], end_date = last_pass[1])
-    tz.registry.add_attribute(attr_name = "era_to_dowa_mapping", attr_val = map_dict)
-    tz.registry.add_attribute(attr_name = "variables", attr_val = var_labels)
-    # add lat, lon, proj, x, y
-    root = tz.initialise_dataset_backend
-    #shift long to [0,360]
-    long[long < 0] = long[long < 0] + 360
-    tz.add(store = root, name = 'longitudes', data = long, ds_shape = long.shape, add_method = 'overwrite')
-    tz.add(store = root, name = 'latitudes', data = lat, ds_shape = lat.shape, add_method = 'overwrite')
-    tz.add(store = root, name = 'x', data = ds.x, ds_shape = ds.x.shape, add_method = 'overwrite')
-    tz.add(store = root, name = 'y', data = ds.y, ds_shape = ds.y.shape, add_method = 'overwrite')
-    # Have to convert np.array to list in proj to store it in zarr archive
-    ds.projection
-    proj = ds._projection
-    proj['standard_parallel'] = list(proj['standard_parallel'])
-    tz.registry.add_attribute(attr_name = "projection_lambert", attr_val = proj)
-    # tz.add(store = root, name = 'projection_lambert', data = ds._projection)
-    print("Finished creating zarr dataset")
+        print("Adding metadata")
+        tz.registry.add_basic_metadata(start_date = last_pass[0], end_date = last_pass[1])
+        tz.registry.add_attribute(attr_name = "era_to_dowa_mapping", attr_val = map_dict)
+        tz.registry.add_attribute(attr_name = "variables", attr_val = var_labels)
+        # add lat, lon, proj, x, y
+        root = tz.initialise_dataset_backend
+        #shift long to [0,360]
+        long[long < 0] = long[long < 0] + 360
+        tz.add(store = root, name = 'longitudes', data = long, ds_shape = long.shape, add_method = 'overwrite')
+        tz.add(store = root, name = 'latitudes', data = lat, ds_shape = lat.shape, add_method = 'overwrite')
+        tz.add(store = root, name = 'x', data = ds.x, ds_shape = ds.x.shape, add_method = 'overwrite')
+        tz.add(store = root, name = 'y', data = ds.y, ds_shape = ds.y.shape, add_method = 'overwrite')
+        # Have to convert np.array to list in proj to store it in zarr archive
+        ds.projection
+        proj = ds._projection
+        proj['standard_parallel'] = list(proj['standard_parallel'])
+        tz.registry.add_attribute(attr_name = "projection_lambert", attr_val = proj)
+        # tz.add(store = root, name = 'projection_lambert', data = ds._projection)
+        print("Finished creating zarr dataset")
 
 
 if __name__ == "__main__":
