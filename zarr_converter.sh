@@ -14,11 +14,11 @@
 
 # on your cluster you might need these:
 # set the network interface
-# export NCCL_SOCKET_IFNAME=ib0,lo
+#export NCCL_SOCKET_IFNAME=ib0,lo
 
 # generic settings
-CONDA_ENV=zarr
-GITDIR=/hpcperm/nld1247/zarr_converter
+CONDA_ENV=aifs-dev
+GITDIR=/ec/res4/hpcperm/ecme5801/DOWA/zarr_converter
 WORKDIR=$GITDIR
 
 cd $WORKDIR

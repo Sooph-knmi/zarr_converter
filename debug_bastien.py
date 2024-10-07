@@ -128,7 +128,8 @@ def ZarrSinglePlotNoBoundaries_dewpointdiff_bastien(fig, ax, ds, var, var2, time
     Coastlines().plot_continents(ax)
 
 #from plots import ZarrSinglePlotNoBoundaries
-ds = open_dataset("/ec/res4/scratch/ecme5801/DOWA_zarr/test_fullday.zarr")
+ds = open_dataset("/ec/res4/scratch/ecme5801/DOWA_zarr/dowa_2013_2017.zarr")
+ds.name_to_index
 folder_path = "/ec/res4/hpcperm/ecme5801/DOWA/Plots/"
 folder_path = "/ec/res4/hpcperm/ecme5801/DOWA/zarr_converter/output/plots_bastien/"
 res = "5"

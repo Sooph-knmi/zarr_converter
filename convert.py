@@ -39,9 +39,9 @@ def meps_to_zarr(
         )   
         config = ds.config
         print("date", ds.dates[date_index])
-        if os.path.exists('/ec/res4/scratch/nld1247/output/dowa_2008-2012.zarr'):
+        if os.path.exists('/ec/res4/scratch/ecme5801/DOWA_zarr/dowa_2013_2017.zarr'):
             print("path exists")
-            anemoi_zarr = open_dataset('/ec/res4/scratch/nld1247/output/dowa_2008-2012.zarr')
+            anemoi_zarr = open_dataset('/ec/res4/scratch/ecme5801/DOWA_zarr/dowa_2013_2017.zarr')
             if np.array(ds.dataset["time"])[date_index] in anemoi_zarr.dates:
                 print("date already exists, skipping")
                 pass
@@ -102,7 +102,7 @@ def meps_to_zarr_create(ds, date_index, grid_steps, config, zarr_config, last_pa
     if last_pass is not None:
         tz = ToZarr(config = zarr_config)
         start_time = {
-            "year": 2008,
+            "year": 2013,
             "month": 1,
             "day": 1,
             "hour": 00
@@ -115,9 +115,9 @@ def meps_to_zarr_create(ds, date_index, grid_steps, config, zarr_config, last_pa
         # }
 
         end_time = {
-            "year": 2012,
-            "month": 12,
-            "day": 31,
+            "year": 2017,
+            "month": 12, #12
+            "day": 31, #31
             "hour": 18
         }
         last_pass = [start_time, end_time]

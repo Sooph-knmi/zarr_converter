@@ -1,0 +1,297 @@
+[ECMWF-INFO -sbatch] - -------------------------------------------------------------------------------------
+[ECMWF-INFO -sbatch] -  This is the ECMWF jobfilter
+[ECMWF-INFO -sbatch] -  +++ Please report issues using the Support portal +++
+[ECMWF-INFO -sbatch] -  +++ https://support.ecmwf.int                     +++
+[ECMWF-INFO -sbatch] -  /usr/local/bin/ecsbatch: size: 49527, mtime: Thu Sep  5 11:59:47 2024
+[ECMWF-INFO -sbatch] - -------------------------------------------------------------------------------------
+[ECMWF-INFO -sbatch] - Time at submit: Mon Sep 30 09:44:38 2024 (1727689478.6347592) on ac6-100.bullx:/lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter
+[ECMWF-INFO -sbatch] - --- SLURM VARIABLES ---
+[ECMWF-INFO -sbatch] - EC_CLUSTER=ac
+[ECMWF-INFO -sbatch] - SLURM_EXPORT_ENV=ALL
+[ECMWF-INFO -sbatch] - SBATCH_EXPORT=NONE
+[ECMWF-INFO -sbatch] - -----------------------
+[ECMWF-INFO -sbatch] - jobscript: /lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter/zarr_converter.sh
+[ECMWF-INFO -sbatch] - --- SCRIPT OPTIONS ---
+[ECMWF-INFO -sbatch] - #SBATCH --nodes=1
+[ECMWF-INFO -sbatch] - #SBATCH --ntasks-per-node=1
+[ECMWF-INFO -sbatch] - #SBATCH --gpus-per-node=0
+[ECMWF-INFO -sbatch] - #SBATCH --cpus-per-task=32
+[ECMWF-INFO -sbatch] - #SBATCH --mem=64GB
+[ECMWF-INFO -sbatch] - #SBATCH --qos=express
+[ECMWF-INFO -sbatch] - #SBATCH --time=00:05:00
+[ECMWF-INFO -sbatch] - #SBATCH --job-name=zarr_conv_dowa
+[ECMWF-INFO -sbatch] - #SBATCH --output=hello-%J.out
+[ECMWF-INFO -sbatch] - #SBATCH --error=hello-%J.out
+[ECMWF-INFO -sbatch] - #SBATCH --mail-type=FAIL
+[ECMWF-INFO -sbatch] - #SBATCH --mail-user=bastien.francois95@gmail.com
+[ECMWF-INFO -sbatch] - -----------------------
+[ECMWF-INFO -sbatch] - --- POST-PROCESSED OPTIONS ---
+[ECMWF-INFO -sbatch] - ARG --positional=['zarr_converter.sh']
+[ECMWF-INFO -sbatch] - ARG --cpus_per_task=32
+[ECMWF-INFO -sbatch] - ARG --error=hello-%J.out
+[ECMWF-INFO -sbatch] - ARG --job_name=zarr_conv_dowa
+[ECMWF-INFO -sbatch] - ARG --mail_type=FAIL
+[ECMWF-INFO -sbatch] - ARG --mail_user=bastien.francois95@gmail.com
+[ECMWF-INFO -sbatch] - ARG --ntasks_per_node=1
+[ECMWF-INFO -sbatch] - ARG --nodes=1
+[ECMWF-INFO -sbatch] - ARG --output=hello-%J.out
+[ECMWF-INFO -sbatch] - ARG --qos=express
+[ECMWF-INFO -sbatch] - ARG --time=00:05:00
+[ECMWF-INFO -sbatch] - ARG --mem=64GB
+[ECMWF-INFO -sbatch] - ARG --gpus_per_node=0
+[ECMWF-INFO -sbatch] - ------------------------------
+[ECMWF-INFO -sbatch] - jobtag: ecme5801-zarr_conv_dowa-1x256-/lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter/hello-_.out
+[ECMWF-INFO -sbatch] - ['/usr/bin/sbatch', '--cpus-per-task=32', '--error=hello-%J.out', '--job-name=zarr_conv_dowa', '--mail-type=FAIL', '--mail-user=bastien.francois95@gmail.com', '--ntasks-per-node=1', '--nodes=1', '--output=hello-%J.out', '--qos=express', '--time=00:05:00', '--mem=64GB', '--gpus-per-node=0', '--licenses=h2resw01', '--export=EC_user_time_limit=00:05:00', '/lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter/zarr_converter.sh']
+[ECMWF-INFO -sbatch] - sbatch executed on ac
+[ECMWF-INFO -sbatch] - Job queued on ac using method local
+[ECMWF-ERROR-sbatch] - ac: sbatch: error: Batch job submission failed: Invalid qos specification
+[ECMWF-INFO -sbatch] - -------------------------------------------------------------------------------------
+[ECMWF-INFO -sbatch] -  This is the ECMWF jobfilter
+[ECMWF-INFO -sbatch] -  +++ Please report issues using the Support portal +++
+[ECMWF-INFO -sbatch] -  +++ https://support.ecmwf.int                     +++
+[ECMWF-INFO -sbatch] -  /usr/local/bin/ecsbatch: size: 49527, mtime: Thu Sep  5 11:59:47 2024
+[ECMWF-INFO -sbatch] - -------------------------------------------------------------------------------------
+[ECMWF-INFO -sbatch] - Time at submit: Mon Sep 30 09:46:15 2024 (1727689575.2294111) on ac6-100.bullx:/lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter
+[ECMWF-INFO -sbatch] - --- SLURM VARIABLES ---
+[ECMWF-INFO -sbatch] - EC_CLUSTER=ac
+[ECMWF-INFO -sbatch] - SLURM_EXPORT_ENV=ALL
+[ECMWF-INFO -sbatch] - SBATCH_EXPORT=NONE
+[ECMWF-INFO -sbatch] - -----------------------
+[ECMWF-INFO -sbatch] - jobscript: /lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter/zarr_converter.sh
+[ECMWF-INFO -sbatch] - --- SCRIPT OPTIONS ---
+[ECMWF-INFO -sbatch] - #SBATCH --qos=express
+[ECMWF-INFO -sbatch] - #SBATCH --time=00:05:00
+[ECMWF-INFO -sbatch] - #SBATCH --job-name=zarr_conv_dowa
+[ECMWF-INFO -sbatch] - #SBATCH --output=hello-%J.out
+[ECMWF-INFO -sbatch] - #SBATCH --error=hello-%J.out
+[ECMWF-INFO -sbatch] - #SBATCH --mail-type=FAIL
+[ECMWF-INFO -sbatch] - #SBATCH --mail-user=bastien.francois95@gmail.com
+[ECMWF-INFO -sbatch] - -----------------------
+[ECMWF-INFO -sbatch] - --- POST-PROCESSED OPTIONS ---
+[ECMWF-INFO -sbatch] - ARG --positional=['zarr_converter.sh']
+[ECMWF-INFO -sbatch] - ARG --error=hello-%J.out
+[ECMWF-INFO -sbatch] - ARG --job_name=zarr_conv_dowa
+[ECMWF-INFO -sbatch] - ARG --mail_type=FAIL
+[ECMWF-INFO -sbatch] - ARG --mail_user=bastien.francois95@gmail.com
+[ECMWF-INFO -sbatch] - ARG --output=hello-%J.out
+[ECMWF-INFO -sbatch] - ARG --qos=express
+[ECMWF-INFO -sbatch] - ARG --time=00:05:00
+[ECMWF-INFO -sbatch] - ------------------------------
+[ECMWF-INFO -sbatch] - jobtag: ecme5801-zarr_conv_dowa-1x256-/lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter/hello-_.out
+[ECMWF-INFO -sbatch] - ['/usr/bin/sbatch', '--error=hello-%J.out', '--job-name=zarr_conv_dowa', '--mail-type=FAIL', '--mail-user=bastien.francois95@gmail.com', '--output=hello-%J.out', '--qos=express', '--time=00:05:00', '--licenses=h2resw01', '--export=EC_user_time_limit=00:05:00', '/lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter/zarr_converter.sh']
+[ECMWF-INFO -sbatch] - sbatch executed on ac
+[ECMWF-INFO -sbatch] - Job queued on ac using method local
+[ECMWF-ERROR-sbatch] - ac: sbatch: error: Batch job submission failed: Invalid qos specification
+[ECMWF-INFO -sbatch] - -------------------------------------------------------------------------------------
+[ECMWF-INFO -sbatch] -  This is the ECMWF jobfilter
+[ECMWF-INFO -sbatch] -  +++ Please report issues using the Support portal +++
+[ECMWF-INFO -sbatch] -  +++ https://support.ecmwf.int                     +++
+[ECMWF-INFO -sbatch] -  /usr/local/bin/ecsbatch: size: 49527, mtime: Thu Sep  5 11:59:47 2024
+[ECMWF-INFO -sbatch] - -------------------------------------------------------------------------------------
+[ECMWF-INFO -sbatch] - Time at submit: Mon Sep 30 09:47:45 2024 (1727689665.7333455) on ac6-100.bullx:/lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter
+[ECMWF-INFO -sbatch] - --- SLURM VARIABLES ---
+[ECMWF-INFO -sbatch] - EC_CLUSTER=ac
+[ECMWF-INFO -sbatch] - SLURM_EXPORT_ENV=ALL
+[ECMWF-INFO -sbatch] - SBATCH_EXPORT=NONE
+[ECMWF-INFO -sbatch] - -----------------------
+[ECMWF-INFO -sbatch] - jobscript: /lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter/zarr_converter.sh
+[ECMWF-INFO -sbatch] - --- SCRIPT OPTIONS ---
+[ECMWF-INFO -sbatch] - #SBATCH --nodes=1
+[ECMWF-INFO -sbatch] - #SBATCH --ntasks-per-node=1
+[ECMWF-INFO -sbatch] - #SBATCH --gpus-per-node=0
+[ECMWF-INFO -sbatch] - #SBATCH --cpus-per-task=32
+[ECMWF-INFO -sbatch] - #SBATCH --mem=16GB
+[ECMWF-INFO -sbatch] - #SBATCH --qos=el
+[ECMWF-INFO -sbatch] - #SBATCH --time=120:00:00
+[ECMWF-INFO -sbatch] - #SBATCH --job-name=zarr_conv_dowa
+[ECMWF-INFO -sbatch] - #SBATCH --output=hello-%J.out
+[ECMWF-INFO -sbatch] - #SBATCH --error=hello-%J.out
+[ECMWF-INFO -sbatch] - #SBATCH --mail-type=FAIL
+[ECMWF-INFO -sbatch] - #SBATCH --mail-user=bastien.francois95@gmail.com
+[ECMWF-INFO -sbatch] - -----------------------
+[ECMWF-INFO -sbatch] - --- POST-PROCESSED OPTIONS ---
+[ECMWF-INFO -sbatch] - ARG --positional=['zarr_converter.sh']
+[ECMWF-INFO -sbatch] - ARG --cpus_per_task=32
+[ECMWF-INFO -sbatch] - ARG --error=hello-%J.out
+[ECMWF-INFO -sbatch] - ARG --job_name=zarr_conv_dowa
+[ECMWF-INFO -sbatch] - ARG --mail_type=FAIL
+[ECMWF-INFO -sbatch] - ARG --mail_user=bastien.francois95@gmail.com
+[ECMWF-INFO -sbatch] - ARG --ntasks_per_node=1
+[ECMWF-INFO -sbatch] - ARG --nodes=1
+[ECMWF-INFO -sbatch] - ARG --output=hello-%J.out
+[ECMWF-INFO -sbatch] - ARG --qos=el
+[ECMWF-INFO -sbatch] - ARG --time=120:00:00
+[ECMWF-INFO -sbatch] - ARG --mem=16GB
+[ECMWF-INFO -sbatch] - ARG --gpus_per_node=0
+[ECMWF-INFO -sbatch] - ------------------------------
+[ECMWF-INFO -sbatch] - jobtag: ecme5801-zarr_conv_dowa-1x256-/lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter/hello-_.out
+[ECMWF-INFO -sbatch] - ['/usr/bin/sbatch', '--cpus-per-task=32', '--error=hello-%J.out', '--job-name=zarr_conv_dowa', '--mail-type=FAIL', '--mail-user=bastien.francois95@gmail.com', '--ntasks-per-node=1', '--nodes=1', '--output=hello-%J.out', '--qos=el', '--time=120:00:00', '--mem=16GB', '--gpus-per-node=0', '--licenses=h2resw01', '--export=EC_user_time_limit=120:00:00', '/lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter/zarr_converter.sh']
+[ECMWF-INFO -sbatch] - sbatch executed on ac
+[ECMWF-INFO -sbatch] - Job queued on ac using method local
+[ECMWF-ERROR-sbatch] - ac: sbatch: error: Batch job submission failed: Invalid qos specification
+[ECMWF-INFO -sbatch] - -------------------------------------------------------------------------------------
+[ECMWF-INFO -sbatch] -  This is the ECMWF jobfilter
+[ECMWF-INFO -sbatch] -  +++ Please report issues using the Support portal +++
+[ECMWF-INFO -sbatch] -  +++ https://support.ecmwf.int                     +++
+[ECMWF-INFO -sbatch] -  /usr/local/bin/ecsbatch: size: 49527, mtime: Thu Sep  5 11:59:47 2024
+[ECMWF-INFO -sbatch] - -------------------------------------------------------------------------------------
+[ECMWF-INFO -sbatch] - Time at submit: Mon Sep 30 09:48:32 2024 (1727689712.7175667) on ac6-100.bullx:/lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter
+[ECMWF-INFO -sbatch] - --- SLURM VARIABLES ---
+[ECMWF-INFO -sbatch] - EC_CLUSTER=ac
+[ECMWF-INFO -sbatch] - SLURM_EXPORT_ENV=ALL
+[ECMWF-INFO -sbatch] - SBATCH_EXPORT=NONE
+[ECMWF-INFO -sbatch] - -----------------------
+[ECMWF-INFO -sbatch] - jobscript: /lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter/zarr_converter.sh
+[ECMWF-INFO -sbatch] - --- SCRIPT OPTIONS ---
+[ECMWF-INFO -sbatch] - #SBATCH --job-name=helloworld
+[ECMWF-INFO -sbatch] - #SBATCH --output=hello-%J.out
+[ECMWF-INFO -sbatch] - #SBATCH --error=hello-%J.out
+[ECMWF-INFO -sbatch] - #SBATCH --chdir=/scratch/user
+[ECMWF-INFO -sbatch] - #SBATCH --qos=express
+[ECMWF-INFO -sbatch] - #SBATCH --time=00:05:00
+[ECMWF-INFO -sbatch] - #SBATCH --mail-type=FAIL
+[ECMWF-INFO -sbatch] - -----------------------
+[ECMWF-INFO -sbatch] - --- POST-PROCESSED OPTIONS ---
+[ECMWF-INFO -sbatch] - ARG --positional=['zarr_converter.sh']
+[ECMWF-INFO -sbatch] - ARG --chdir=/scratch/user
+[ECMWF-INFO -sbatch] - ARG --error=hello-%J.out
+[ECMWF-INFO -sbatch] - ARG --job_name=helloworld
+[ECMWF-INFO -sbatch] - ARG --mail_type=FAIL
+[ECMWF-INFO -sbatch] - ARG --output=hello-%J.out
+[ECMWF-INFO -sbatch] - ARG --qos=express
+[ECMWF-INFO -sbatch] - ARG --time=00:05:00
+[ECMWF-INFO -sbatch] - ------------------------------
+[ECMWF-INFO -sbatch] - jobtag: ecme5801-helloworld-1x256-/lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter/hello-_.out
+[ECMWF-INFO -sbatch] - ['/usr/bin/sbatch', '--chdir=/scratch/user', '--error=hello-%J.out', '--job-name=helloworld', '--mail-type=FAIL', '--output=hello-%J.out', '--qos=express', '--time=00:05:00', '--export=EC_user_time_limit=00:05:00', '/lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter/zarr_converter.sh']
+[ECMWF-INFO -sbatch] - sbatch executed on ac
+[ECMWF-INFO -sbatch] - Job queued on ac using method local
+[ECMWF-ERROR-sbatch] - ac: sbatch: error: Batch job submission failed: Invalid qos specification
+[ECMWF-INFO -sbatch] - -------------------------------------------------------------------------------------
+[ECMWF-INFO -sbatch] -  This is the ECMWF jobfilter
+[ECMWF-INFO -sbatch] -  +++ Please report issues using the Support portal +++
+[ECMWF-INFO -sbatch] -  +++ https://support.ecmwf.int                     +++
+[ECMWF-INFO -sbatch] -  /usr/local/bin/ecsbatch: size: 50299, mtime: Thu Oct  3 12:05:29 2024
+[ECMWF-INFO -sbatch] - -------------------------------------------------------------------------------------
+[ECMWF-INFO -sbatch] - Time at submit: Mon Oct  7 09:02:10 2024 (1728291730.68151) on ac6-200.bullx:/lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter
+[ECMWF-INFO -sbatch] - --- SLURM VARIABLES ---
+[ECMWF-INFO -sbatch] - EC_CLUSTER=ecs
+[ECMWF-INFO -sbatch] - SLURM_EXPORT_ENV=ALL
+[ECMWF-INFO -sbatch] - SBATCH_EXPORT=NONE
+[ECMWF-INFO -sbatch] - -----------------------
+[ECMWF-INFO -sbatch] - jobscript: /lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter/zarr_converter.sh
+[ECMWF-INFO -sbatch] - --- SCRIPT OPTIONS ---
+[ECMWF-INFO -sbatch] - #SBATCH --nodes=1
+[ECMWF-INFO -sbatch] - #SBATCH --ntasks-per-node=1
+[ECMWF-INFO -sbatch] - #SBATCH --gpus-per-node=0
+[ECMWF-INFO -sbatch] - #SBATCH --cpus-per-task=32
+[ECMWF-INFO -sbatch] - #SBATCH --mem=64GB
+[ECMWF-INFO -sbatch] - #SBATCH --time=48:00:00
+[ECMWF-INFO -sbatch] - #SBATCH --job-name=zarr_conv_dowa
+[ECMWF-INFO -sbatch] - -----------------------
+[ECMWF-INFO -sbatch] - --- POST-PROCESSED OPTIONS ---
+[ECMWF-INFO -sbatch] - ARG --positional=['zarr_converter.sh']
+[ECMWF-INFO -sbatch] - ARG --cpus_per_task=32
+[ECMWF-INFO -sbatch] - ARG --job_name=zarr_conv_dowa
+[ECMWF-INFO -sbatch] - ARG --ntasks_per_node=1
+[ECMWF-INFO -sbatch] - ARG --nodes=1
+[ECMWF-INFO -sbatch] - ARG --time=48:00:00
+[ECMWF-INFO -sbatch] - ARG --mem=64GB
+[ECMWF-INFO -sbatch] - ARG --gpus_per_node=0
+[ECMWF-INFO -sbatch] - ------------------------------
+[ECMWF-INFO -sbatch] - jobtag: ecme5801-zarr_conv_dowa-1x32-/lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter/slurm-_JOBID_.out
+[ECMWF-INFO -sbatch] - ------------------------------
+[ECMWF-INFO -sbatch] - Average Walltime 75 with a Standard Deviation 0
+[ECMWF-INFO -sbatch] - Runtime history
+[ECMWF-INFO -sbatch] -   Date               | Cores   Cluster   Walltime       Mem
+[ECMWF-INFO -sbatch] -   30.09.2024 - 09:54 | 32         ac         75         64G       
+[ECMWF-INFO -sbatch] - ['/usr/bin/sbatch', '--cpus-per-task=32', '--job-name=zarr_conv_dowa', '--ntasks-per-node=1', '--nodes=1', '--time=48:00:00', '--mem=64GB', '--gpus-per-node=0', '--licenses=h2resw01', '--export=EC_user_time_limit=48:00:00', '/lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter/zarr_converter.sh']
+[ECMWF-INFO -sbatch] - sbatch executed on ecs
+[ECMWF-INFO -sbatch] - Job queued on ecs using method local
+[ECMWF-ERROR-sbatch] - ecs: sbatch: error: QOSMaxCpuPerJobLimit
+sbatch: error: Batch job submission failed: Job violates accounting/QOS policy (job submit limit, user's size and/or time limits)
+[ECMWF-INFO -sbatch] - -------------------------------------------------------------------------------------
+[ECMWF-INFO -sbatch] -  This is the ECMWF jobfilter
+[ECMWF-INFO -sbatch] -  +++ Please report issues using the Support portal +++
+[ECMWF-INFO -sbatch] -  +++ https://support.ecmwf.int                     +++
+[ECMWF-INFO -sbatch] -  /usr/local/bin/ecsbatch: size: 50299, mtime: Thu Oct  3 12:05:29 2024
+[ECMWF-INFO -sbatch] - -------------------------------------------------------------------------------------
+[ECMWF-INFO -sbatch] - Time at submit: Mon Oct  7 09:02:43 2024 (1728291763.8066478) on ac6-200.bullx:/lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter
+[ECMWF-INFO -sbatch] - --- SLURM VARIABLES ---
+[ECMWF-INFO -sbatch] - EC_CLUSTER=ecs
+[ECMWF-INFO -sbatch] - SLURM_EXPORT_ENV=ALL
+[ECMWF-INFO -sbatch] - SBATCH_EXPORT=NONE
+[ECMWF-INFO -sbatch] - -----------------------
+[ECMWF-INFO -sbatch] - jobscript: /lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter/zarr_converter.sh
+[ECMWF-INFO -sbatch] - --- SCRIPT OPTIONS ---
+[ECMWF-INFO -sbatch] - #SBATCH --nodes=1
+[ECMWF-INFO -sbatch] - #SBATCH --ntasks-per-node=1
+[ECMWF-INFO -sbatch] - #SBATCH --gpus-per-node=0
+[ECMWF-INFO -sbatch] - #SBATCH --cpus-per-task=32
+[ECMWF-INFO -sbatch] - #SBATCH --mem=64GB
+[ECMWF-INFO -sbatch] - #SBATCH --time=24:00:00
+[ECMWF-INFO -sbatch] - #SBATCH --job-name=zarr_conv_dowa
+[ECMWF-INFO -sbatch] - -----------------------
+[ECMWF-INFO -sbatch] - --- POST-PROCESSED OPTIONS ---
+[ECMWF-INFO -sbatch] - ARG --positional=['zarr_converter.sh']
+[ECMWF-INFO -sbatch] - ARG --cpus_per_task=32
+[ECMWF-INFO -sbatch] - ARG --job_name=zarr_conv_dowa
+[ECMWF-INFO -sbatch] - ARG --ntasks_per_node=1
+[ECMWF-INFO -sbatch] - ARG --nodes=1
+[ECMWF-INFO -sbatch] - ARG --time=24:00:00
+[ECMWF-INFO -sbatch] - ARG --mem=64GB
+[ECMWF-INFO -sbatch] - ARG --gpus_per_node=0
+[ECMWF-INFO -sbatch] - ------------------------------
+[ECMWF-INFO -sbatch] - jobtag: ecme5801-zarr_conv_dowa-1x32-/lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter/slurm-_JOBID_.out
+[ECMWF-INFO -sbatch] - ------------------------------
+[ECMWF-INFO -sbatch] - Average Walltime 75 with a Standard Deviation 0
+[ECMWF-INFO -sbatch] - Runtime history
+[ECMWF-INFO -sbatch] -   Date               | Cores   Cluster   Walltime       Mem
+[ECMWF-INFO -sbatch] -   30.09.2024 - 09:54 | 32         ac         75         64G       
+[ECMWF-INFO -sbatch] - ['/usr/bin/sbatch', '--cpus-per-task=32', '--job-name=zarr_conv_dowa', '--ntasks-per-node=1', '--nodes=1', '--time=24:00:00', '--mem=64GB', '--gpus-per-node=0', '--licenses=h2resw01', '--export=EC_user_time_limit=24:00:00', '/lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter/zarr_converter.sh']
+[ECMWF-INFO -sbatch] - sbatch executed on ecs
+[ECMWF-INFO -sbatch] - Job queued on ecs using method local
+[ECMWF-ERROR-sbatch] - ecs: sbatch: error: QOSMaxCpuPerJobLimit
+sbatch: error: Batch job submission failed: Job violates accounting/QOS policy (job submit limit, user's size and/or time limits)
+[ECMWF-INFO -sbatch] - -------------------------------------------------------------------------------------
+[ECMWF-INFO -sbatch] -  This is the ECMWF jobfilter
+[ECMWF-INFO -sbatch] -  +++ Please report issues using the Support portal +++
+[ECMWF-INFO -sbatch] -  +++ https://support.ecmwf.int                     +++
+[ECMWF-INFO -sbatch] -  /usr/local/bin/ecsbatch: size: 50299, mtime: Thu Oct  3 12:05:29 2024
+[ECMWF-INFO -sbatch] - -------------------------------------------------------------------------------------
+[ECMWF-INFO -sbatch] - Time at submit: Mon Oct  7 09:03:25 2024 (1728291805.2607007) on ac6-200.bullx:/lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter
+[ECMWF-INFO -sbatch] - --- SLURM VARIABLES ---
+[ECMWF-INFO -sbatch] - EC_CLUSTER=ecs
+[ECMWF-INFO -sbatch] - SLURM_EXPORT_ENV=ALL
+[ECMWF-INFO -sbatch] - SBATCH_EXPORT=NONE
+[ECMWF-INFO -sbatch] - -----------------------
+[ECMWF-INFO -sbatch] - jobscript: /lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter/zarr_converter.sh
+[ECMWF-INFO -sbatch] - --- SCRIPT OPTIONS ---
+[ECMWF-INFO -sbatch] - #SBATCH --nodes=1
+[ECMWF-INFO -sbatch] - #SBATCH --ntasks-per-node=1
+[ECMWF-INFO -sbatch] - #SBATCH --gpus-per-node=0
+[ECMWF-INFO -sbatch] - #SBATCH --cpus-per-task=32
+[ECMWF-INFO -sbatch] - #SBATCH --mem=64GB
+[ECMWF-INFO -sbatch] - #SBATCH --time=48:00:00
+[ECMWF-INFO -sbatch] - #SBATCH --job-name=zarr_conv_dowa
+[ECMWF-INFO -sbatch] - -----------------------
+[ECMWF-INFO -sbatch] - --- POST-PROCESSED OPTIONS ---
+[ECMWF-INFO -sbatch] - ARG --positional=['zarr_converter.sh']
+[ECMWF-INFO -sbatch] - ARG --cpus_per_task=32
+[ECMWF-INFO -sbatch] - ARG --job_name=zarr_conv_dowa
+[ECMWF-INFO -sbatch] - ARG --ntasks_per_node=1
+[ECMWF-INFO -sbatch] - ARG --nodes=1
+[ECMWF-INFO -sbatch] - ARG --time=48:00:00
+[ECMWF-INFO -sbatch] - ARG --mem=64GB
+[ECMWF-INFO -sbatch] - ARG --gpus_per_node=0
+[ECMWF-INFO -sbatch] - ------------------------------
+[ECMWF-INFO -sbatch] - jobtag: ecme5801-zarr_conv_dowa-1x32-/lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter/slurm-_JOBID_.out
+[ECMWF-INFO -sbatch] - ------------------------------
+[ECMWF-INFO -sbatch] - Average Walltime 75 with a Standard Deviation 0
+[ECMWF-INFO -sbatch] - Runtime history
+[ECMWF-INFO -sbatch] -   Date               | Cores   Cluster   Walltime       Mem
+[ECMWF-INFO -sbatch] -   30.09.2024 - 09:54 | 32         ac         75         64G       
+[ECMWF-INFO -sbatch] - ['/usr/bin/sbatch', '--cpus-per-task=32', '--job-name=zarr_conv_dowa', '--ntasks-per-node=1', '--nodes=1', '--time=48:00:00', '--mem=64GB', '--gpus-per-node=0', '--licenses=h2resw01', '--export=EC_user_time_limit=48:00:00', '/lus/h2resw01/hpcperm/ecme5801/DOWA/zarr_converter/zarr_converter.sh']
+[ECMWF-INFO -sbatch] - sbatch executed on ecs
+[ECMWF-INFO -sbatch] - Job queued on ecs using method local
+[ECMWF-ERROR-sbatch] - ecs: sbatch: error: QOSMaxCpuPerJobLimit
+sbatch: error: Batch job submission failed: Job violates accounting/QOS policy (job submit limit, user's size and/or time limits)

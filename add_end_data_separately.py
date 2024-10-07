@@ -14,7 +14,7 @@ def add_end_data(nc_path, nth_point = 4, last_pass = None, mstepcounter = 0, zar
         )   
     tz = ToZarr(config = zarr_config)
     start_time = {
-        "year": 2008,
+        "year": 2013,
         "month": 1,
         "day": 1,
         "hour": 00
@@ -27,7 +27,7 @@ def add_end_data(nc_path, nth_point = 4, last_pass = None, mstepcounter = 0, zar
     # }
 
     end_time = {
-        "year": 2008,
+        "year": 2017,
         "month": 12,
         "day": 31,
         "hour": 00
